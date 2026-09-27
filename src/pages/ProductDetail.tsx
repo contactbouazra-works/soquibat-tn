@@ -3,6 +3,7 @@ import { useState, type PointerEvent } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { products } from '../data/soquibat';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
+import { Seo } from '../components/Seo';
 
 export function ProductDetail() {
   const { slug } = useParams();
@@ -20,6 +21,12 @@ export function ProductDetail() {
   if (!product) {
     return (
       <section className="min-h-[65vh] bg-black px-6 pb-24 pt-36 text-white lg:px-12">
+        <Seo
+          title="Produit introuvable | SOQUIBAT Group"
+          description="Ce produit n’est pas disponible dans le catalogue SOQUIBAT Group. Consultez l’ensemble de nos produits métallurgiques en Tunisie."
+          path={`/produits/${encodeURIComponent(slug ?? '')}`}
+          noindex
+        />
         <div className="mx-auto max-w-4xl">
           <p className="font-display text-sm uppercase tracking-[0.18em] text-orange">Catalogue SOQUIBAT</p>
           <h1 className="mt-3 font-display text-4xl">Produit introuvable</h1>
@@ -83,6 +90,12 @@ export function ProductDetail() {
 
   return (
     <section className="min-h-screen bg-black px-6 pb-24 pt-32 text-white lg:px-12 lg:pb-32 lg:pt-40" aria-labelledby="product-title">
+      <Seo
+        title={`${product.name} en Tunisie | SOQUIBAT Group`}
+        description={product.description}
+        path={`/produits/${encodeURIComponent(product.slug)}`}
+        image={product.image}
+      />
       <div className="mx-auto max-w-[1400px]">
         <nav aria-label="Fil d’Ariane" className="mb-10 flex flex-wrap items-center gap-2 text-xs text-white/50 sm:text-sm">
           <Link to="/" className="transition hover:text-orange">Accueil</Link>

@@ -2,10 +2,16 @@ import { Link } from 'react-router-dom';
 import { products } from '../data/soquibat';
 import { motion } from 'framer-motion';
 import { Reveal } from '../components/Reveal';
+import { Seo } from '../components/Seo';
 
 export function Products() {
   return (
     <section className="bg-ink px-6 pb-24 pt-36 lg:px-12 lg:pt-44">
+      <Seo
+        title="Produits métallurgiques en Tunisie | SOQUIBAT Group"
+        description="Consultez le catalogue SOQUIBAT : poutrelles, tôles, tubes acier, panneaux sandwich, inox, fer marchand et découpe laser. Demandez un devis adapté à votre projet."
+        path="/produits"
+      />
       <div className="mx-auto max-w-[1400px]">
         <Reveal as="h1" className="font-display text-4xl uppercase text-paper lg:text-6xl">
           Nos produits
