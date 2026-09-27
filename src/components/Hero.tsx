@@ -22,7 +22,7 @@ const HERO_STEP_DEBOUNCE = 750;
 const WHEEL_THRESHOLD = 18;
 const heroNavigation = [
   { label: 'Produits', to: '/#produits' },
-  { label: 'Le groupe', to: '/#histoire' },
+  { label: 'Le groupe', to: '/groupe' },
   { label: 'Implantations', to: '/#points-de-vente' },
   { label: 'Actualités', to: '/actualites' },
   { label: 'Carrière', to: '/recrutement' },
@@ -239,7 +239,7 @@ export function Hero() {
             title={secondFrame.title}
             subtitle={secondFrame.subtitle}
             description="Qualité et services inégalés. Innover pour relever les défis ambitieux de demain."
-            ctaHref="/#histoire"
+            ctaHref="/groupe"
             ctaLabel="Découvrir le groupe"
             headingLevel="h2"
           />
@@ -280,22 +280,20 @@ export function Hero() {
             style={{ opacity: secondImageOpacity }}
             draggable={false}
           />
-          <div
-            className="absolute inset-0 z-10"
-            style={{
-              backgroundImage:
-                'linear-gradient(to right, rgba(12, 13, 15, 0.92) 0%, rgba(12, 13, 15, 0.72) 40%, rgba(12, 13, 15, 0.38) 68%, rgba(12, 13, 15, 0.08) 100%)',
-            }}
-          />
-          <div
-            className="absolute inset-0 z-10"
-            style={{
-              backgroundImage: 'linear-gradient(to top, rgba(12, 13, 15, 0.34), transparent 42%, rgba(12, 13, 15, 0.12))',
-            }}
+          <motion.div
+            aria-hidden="true"
+            className="hero-image-overlay--left absolute inset-0 z-10"
+            style={{ opacity: firstImageOpacity }}
           />
           <motion.div
             aria-hidden="true"
-            className="absolute inset-0 z-10 bg-slate-950/30"
+            className="hero-image-overlay--right absolute inset-0 z-10"
+            style={{ opacity: secondImageOpacity }}
+          />
+          <div aria-hidden="true" className="hero-image-vignette absolute inset-0 z-10" />
+          <motion.div
+            aria-hidden="true"
+            className="hero-image-expansion-scrim absolute inset-0 z-10"
             style={{ opacity: imageScrimOpacity }}
           />
           <div className="absolute left-4 top-4 z-20 h-7 w-7 border-l-2 border-t-2 border-orange lg:left-8 lg:top-8 lg:h-9 lg:w-9" aria-hidden="true" />
@@ -320,23 +318,23 @@ export function Hero() {
         >
           <motion.div
             aria-hidden="true"
-            className="pointer-events-none absolute -inset-x-5 -inset-y-4 z-0 rounded-2xl bg-black/20 backdrop-blur-sm sm:-inset-x-7 sm:-inset-y-6"
+            className="hero-image-copy-scrim pointer-events-none absolute -inset-x-5 -inset-y-4 z-0 rounded-2xl backdrop-blur-sm sm:-inset-x-7 sm:-inset-y-6"
             style={{ opacity: firstTextScrimOpacity }}
           />
           <div className="relative z-20 w-full pointer-events-auto">
             <p className="mb-4 font-display text-xs tracking-[0.2em] text-orange uppercase sm:text-sm">{firstFrame.kicker}</p>
-            <h1 className="font-display text-3xl leading-[0.96] text-paper uppercase sm:text-5xl lg:text-6xl xl:text-7xl">
+            <h1 className="font-display text-3xl leading-[0.96] text-slate-900 uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.15)] dark:text-white dark:drop-shadow-none sm:text-5xl lg:text-6xl xl:text-7xl">
               {firstFrame.title}
             </h1>
-            <p className="mt-3 font-display text-base leading-snug text-paper/75 uppercase sm:text-xl lg:text-2xl">
+            <p className="mt-3 font-display text-base leading-snug text-slate-700 uppercase dark:text-slate-300 sm:text-xl lg:text-2xl">
               {firstFrame.subtitle}
             </p>
-            <p className="mt-3 max-w-lg text-xs leading-relaxed text-paper/75 sm:mt-5 sm:text-base lg:mt-7">
+            <p className="mt-3 max-w-lg text-xs leading-relaxed text-slate-700 drop-shadow-[0_2px_4px_rgba(0,0,0,0.15)] dark:text-slate-300 dark:drop-shadow-none sm:mt-5 sm:text-base lg:mt-7">
               {company.description}
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-x-8 gap-y-4 sm:mt-9">
               <CTAButton href="/produits">Nos produits</CTAButton>
-              <CTAButton href="/#histoire" variant="ghost">Le groupe</CTAButton>
+              <CTAButton href="/groupe" variant="ghost">Le groupe</CTAButton>
             </div>
           </div>
         </motion.div>
@@ -345,7 +343,7 @@ export function Hero() {
           aria-label="Liens rapides"
           aria-hidden={activeStoryText !== 'products'}
           inert={activeStoryText !== 'products'}
-          className={`absolute inset-y-0 right-0 z-30 flex w-[75vw] items-center border-l border-orange/50 bg-black/85 px-5 backdrop-blur-md sm:px-10 lg:px-16 ${activeStoryText === 'products' ? 'pointer-events-auto' : 'pointer-events-none'}`}
+          className={`absolute inset-y-0 right-0 z-30 flex w-[75vw] items-center border-l border-orange/50 bg-white/90 px-5 text-slate-900 shadow-xl backdrop-blur-md dark:bg-slate-950/90 dark:text-slate-100 sm:px-10 lg:px-16 ${activeStoryText === 'products' ? 'pointer-events-auto' : 'pointer-events-none'}`}
           style={{ x: productPanelX, opacity: productPanelOpacity }}
         >
           <div className="w-full">
@@ -361,8 +359,8 @@ export function Hero() {
                   >
                     <span className="font-display text-xs text-orange/70 sm:text-sm">0{index + 1}</span>
                     <span
-                      className="font-display text-xl uppercase text-transparent transition-colors duration-300 group-hover:text-white sm:text-3xl lg:text-5xl"
-                      style={{ WebkitTextStroke: '1px rgba(255,255,255,0.72)' }}
+                      className="font-display text-xl uppercase text-transparent transition-colors duration-300 group-hover:text-slate-900 dark:group-hover:text-white sm:text-3xl lg:text-5xl"
+                      style={{ WebkitTextStroke: '1px var(--hero-nav-stroke)' }}
                     >
                       {item.label}
                     </span>
@@ -405,14 +403,14 @@ export function Hero() {
             <h2 className="font-display text-3xl leading-[0.96] uppercase sm:text-5xl lg:text-6xl xl:text-7xl">
               {secondFrame.title}
             </h2>
-            <p className="mt-3 font-display text-base leading-snug text-paper/75 uppercase sm:text-xl lg:text-2xl">
+            <p className="mt-3 font-display text-base leading-snug text-slate-700 uppercase dark:text-slate-300 sm:text-xl lg:text-2xl">
               {secondFrame.subtitle}
             </p>
-            <p className="mt-6 max-w-lg text-sm leading-relaxed text-paper/80 sm:text-base">
+            <p className="mt-6 max-w-lg text-sm leading-relaxed text-slate-700 drop-shadow-[0_2px_4px_rgba(0,0,0,0.15)] dark:text-slate-300 dark:drop-shadow-none sm:text-base">
               Qualité et services inégalés. Innover pour relever les défis ambitieux de demain.
             </p>
             <div className="mt-8">
-              <CTAButton href="/#histoire">Découvrir le groupe</CTAButton>
+              <CTAButton href="/groupe">Découvrir le groupe</CTAButton>
             </div>
           </div>
         </motion.div>

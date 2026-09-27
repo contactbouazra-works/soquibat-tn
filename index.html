@@ -2,6 +2,22 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (() => {
+        let preference = null;
+        try {
+          preference = localStorage.getItem('soquibat-theme');
+        } catch {
+          preference = null;
+        }
+        const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        const theme = preference === 'light' || preference === 'dark'
+          ? preference
+          : systemPrefersLight ? 'light' : 'dark';
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--

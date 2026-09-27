@@ -1,7 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+:root {
+  color-scheme: dark;
+  --hero-copy-color: #ffffff;
+  --hero-muted-copy-color: #e2e8f0;
+  --hero-nav-stroke: rgba(255, 255, 255, 0.72);
+  --hero-copy-shadow: none;
+  --hero-overlay-left: linear-gradient(to right, rgba(12, 13, 15, 0.92) 0%, rgba(12, 13, 15, 0.72) 40%, rgba(12, 13, 15, 0.38) 68%, rgba(12, 13, 15, 0.08) 100%);
+  --hero-overlay-right: linear-gradient(to left, rgba(12, 13, 15, 0.92) 0%, rgba(12, 13, 15, 0.72) 40%, rgba(12, 13, 15, 0.38) 68%, rgba(12, 13, 15, 0.08) 100%);
+  --hero-vignette: linear-gradient(to top, rgba(12, 13, 15, 0.34), transparent 42%, rgba(12, 13, 15, 0.12));
+  --hero-expansion-scrim: rgba(2, 6, 23, 0.3);
+  --hero-copy-scrim: rgba(2, 6, 23, 0.46);
+}
 
 @theme {
   --font-display: 'Oswald', 'Arial Narrow', sans-serif;
@@ -22,6 +36,15 @@
   --color-ink-soft: #ffffff;
   --color-paper: #0f172a;
   --color-line: rgba(15, 23, 42, 0.14);
+  --hero-copy-color: #0f172a;
+  --hero-muted-copy-color: #334155;
+  --hero-nav-stroke: rgba(15, 23, 42, 0.72);
+  --hero-copy-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
+  --hero-overlay-left: linear-gradient(to right, rgba(248, 250, 252, 0.58) 0%, rgba(248, 250, 252, 0.38) 30%, rgba(248, 250, 252, 0.14) 58%, transparent 82%);
+  --hero-overlay-right: linear-gradient(to left, rgba(248, 250, 252, 0.58) 0%, rgba(248, 250, 252, 0.38) 30%, rgba(248, 250, 252, 0.14) 58%, transparent 82%);
+  --hero-vignette: linear-gradient(to top, rgba(255, 255, 255, 0.04), transparent 42%, rgba(255, 255, 255, 0.03));
+  --hero-expansion-scrim: rgba(255, 255, 255, 0.08);
+  --hero-copy-scrim: rgba(255, 255, 255, 0.24);
 }
 
 :root[data-theme='dark'] {
@@ -131,25 +154,46 @@ a {
   -webkit-text-stroke-color: rgba(15, 23, 42, 0.55);
 }
 
-:root[data-theme='light'] .hero-image-copy--intro {
-  color: #0f172a;
+.hero-image-copy--intro,
+.hero-image-copy--product {
+  color: var(--hero-copy-color);
+  text-shadow: var(--hero-copy-shadow);
 }
 
-:root[data-theme='light'] .hero-image-copy--intro h1,
-:root[data-theme='light'] .hero-image-copy--intro h2,
-:root[data-theme='light'] .hero-image-copy--intro [class~="text-paper"],
-:root[data-theme='light'] .hero-image-copy--intro [class~="text-paper/75"],
-:root[data-theme='light'] .hero-image-copy--intro [class~="text-paper/80"] {
-  color: #0f172a;
+.hero-image-copy--intro h1,
+.hero-image-copy--intro h2,
+.hero-image-copy--product h1,
+.hero-image-copy--product h2,
+.hero-image-copy--intro [class~="text-paper"],
+.hero-image-copy--product [class~="text-paper"] {
+  color: var(--hero-copy-color);
 }
 
-:root[data-theme='light'] .hero-image-copy--product,
-:root[data-theme='light'] .hero-image-copy--product h1,
-:root[data-theme='light'] .hero-image-copy--product h2,
-:root[data-theme='light'] .hero-image-copy--product [class~="text-paper"],
-:root[data-theme='light'] .hero-image-copy--product [class~="text-paper/75"],
-:root[data-theme='light'] .hero-image-copy--product [class~="text-paper/80"] {
-  color: #fff;
+.hero-image-copy--intro [class~="text-paper/75"],
+.hero-image-copy--intro [class~="text-paper/80"],
+.hero-image-copy--product [class~="text-paper/75"],
+.hero-image-copy--product [class~="text-paper/80"] {
+  color: var(--hero-muted-copy-color);
+}
+
+.hero-image-overlay--left {
+  background-image: var(--hero-overlay-left);
+}
+
+.hero-image-overlay--right {
+  background-image: var(--hero-overlay-right);
+}
+
+.hero-image-vignette {
+  background-image: var(--hero-vignette);
+}
+
+.hero-image-expansion-scrim {
+  background-color: var(--hero-expansion-scrim);
+}
+
+.hero-image-copy-scrim {
+  background-color: var(--hero-copy-scrim);
 }
 
 .outline-text {

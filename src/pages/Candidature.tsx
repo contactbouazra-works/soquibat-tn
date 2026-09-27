@@ -2,6 +2,7 @@ import { useState, type ChangeEvent, type DragEvent, type FormEvent } from 'reac
 import { Link, useParams } from 'react-router-dom';
 import { Seo } from '../components/Seo';
 import { careers, contact } from '../data/soquibat';
+import { formatFrenchDate } from '../lib/dates';
 import { normalizeSlug } from '../lib/slug';
 
 const MAX_CV_SIZE = 5 * 1024 * 1024;
@@ -38,9 +39,9 @@ export function Candidature() {
     setMailNotice('');
     if (!file) return;
     const extension = file.name.split('.').pop()?.toLowerCase();
-    if (extension !== 'pdf' && extension !== 'docx') {
+    if (extension !== 'pdf' && extension !== 'doc' && extension !== 'docx') {
       setCv(null);
-      setFileError('Choisissez un fichier PDF ou DOCX.');
+      setFileError('Choisissez un fichier PDF, DOC ou DOCX.');
       return;
     }
     if (file.size > MAX_CV_SIZE) {
@@ -84,7 +85,9 @@ export function Candidature() {
     <>
       <Seo
         title={`Candidature ${job.roleTitle} | SOQUIBAT Group`}
-        description={`Préparez une demande concernant l’ancienne annonce ${job.roleTitle} de SOQUIBAT Group. Vérifiez que le poste est toujours ouvert avant d’envoyer votre dossier.`}
+        description={job.status === 'archive'
+          ? `Renseignez-vous auprès de SOQUIBAT Group sur l’ancienne annonce ${job.roleTitle} avant de transmettre une candidature.`
+          : `Contactez SOQUIBAT Group au sujet du poste ${job.roleTitle}, dont les détails et la disponibilité restent à confirmer.`}
         path={`/recrutement/${encodeURIComponent(job.slug)}/postuler`}
         noindex
       />
@@ -100,12 +103,16 @@ export function Candidature() {
             <span aria-current="page" className="text-paper/80">Candidature</span>
           </nav>
 
-          <p className="font-display text-xs uppercase tracking-[0.18em] text-orange">Annonce archivée — disponibilité non confirmée</p>
+          <p className="font-display text-xs uppercase tracking-[0.18em] text-orange">
+            {job.status === 'archive' ? 'Annonce archivée — disponibilité non confirmée' : 'Poste à confirmer'}
+          </p>
           <h1 className="mt-3 font-display text-3xl uppercase sm:text-4xl">
             Candidature pour le poste de : {job.roleTitle}
           </h1>
           <p className="mt-4 leading-relaxed text-paper/70">
-            Cette publication date de 2023. Contactez-nous pour vérifier que l’opportunité est toujours d’actualité avant de transmettre votre candidature.
+            {job.status === 'archive'
+              ? `Cette publication date du ${formatFrenchDate(job.date)}. Contactez-nous pour vérifier que l’opportunité est toujours d’actualité avant de transmettre votre candidature.`
+              : 'Les détails et la disponibilité de ce poste ne sont pas encore confirmés. Contactez-nous avant de transmettre votre candidature.'}
           </p>
 
           <form onSubmit={submitApplication} className="mt-8 space-y-5 rounded-2xl border border-line bg-ink-soft p-5 sm:p-8">
@@ -128,7 +135,7 @@ export function Candidature() {
             </label>
 
             <div>
-              <span className="block text-sm text-paper/80">CV (PDF ou DOCX, 5 Mo maximum)</span>
+              <span className="block text-sm text-paper/80">CV (PDF, DOC ou DOCX, 5 Mo maximum)</span>
               <label
                 htmlFor="cv-file"
                 onDragOver={(event) => event.preventDefault()}
@@ -136,12 +143,12 @@ export function Candidature() {
                 className="mt-2 flex min-h-32 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-line bg-ink px-5 py-6 text-center transition-colors hover:border-orange focus-within:border-orange"
               >
                 <span className="font-display uppercase text-paper">{cv ? cv.name : 'Déposez votre CV ici ou cliquez pour choisir un fichier'}</span>
-                <span className="mt-2 text-xs text-paper/55">PDF ou DOCX · 5 Mo maximum</span>
+                <span className="mt-2 text-xs text-paper/55">PDF, DOC ou DOCX · 5 Mo maximum</span>
                 <input
                   id="cv-file"
                   name="cv"
                   type="file"
-                  accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                   onChange={onFileChange}
                   className="sr-only"
                   aria-describedby={fileError ? 'cv-error' : 'cv-help'}

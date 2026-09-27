@@ -7,6 +7,7 @@ import { useTheme } from '../hooks/useTheme';
 import { nav } from '../data/soquibat';
 import { EASE_OUT } from '../lib/motion';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
+import { GlobalSearch } from './GlobalSearch';
 
 export function Header() {
   const { pathname } = useLocation();
@@ -69,6 +70,8 @@ export function Header() {
               +216 70 131 500
             </a>
           </nav>
+
+          <GlobalSearch />
 
           <button
             type="button"

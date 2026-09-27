@@ -5,7 +5,7 @@ import { news } from '../data/soquibat';
 import { formatFrenchDate, toDateTime } from '../lib/dates';
 import { Seo } from '../components/Seo';
 
-const categories = ['Tous', 'Communiqué de presse', 'Événement', 'RH & Inclusivité'] as const;
+const categories = ['Tous', 'Communiqué de presse', 'Événement', 'RSE & Inclusivité'] as const;
 type CategoryFilter = (typeof categories)[number];
 
 export function Actualites() {
@@ -78,7 +78,7 @@ export function Actualites() {
                   <div className="flex flex-1 flex-col p-5 sm:p-6">
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <span className="rounded-full border border-orange/40 px-3 py-1 font-display text-[0.68rem] uppercase tracking-[0.12em] text-orange">
-                        {item.categories.includes('RH & Inclusivité') ? 'RH & Inclusivité' : 'Événement'}
+                        {item.categories.find((category) => category !== 'Communiqué de presse') ?? item.tag}
                       </span>
                       <time dateTime={toDateTime(item.date)} className="text-xs text-paper/55">
                         {formatFrenchDate(item.date)}

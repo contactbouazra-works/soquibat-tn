@@ -1,14 +1,12 @@
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import darkLogo from '../assets/img/logo-dark.png';
 import whiteLogo from '../assets/img/logo-white.png';
 import { contact, products, socials } from '../data/soquibat';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
-import { useTheme } from '../hooks/useTheme';
 
 const companyLinks = [
-  { label: 'Notre histoire', href: '/#histoire' },
+  { label: 'Notre histoire', href: '/groupe' },
   { label: 'Filiales', href: '/#filiales' },
   { label: 'Actualités', href: '/actualites' },
   { label: 'Carrière', href: '/recrutement' },
@@ -55,16 +53,16 @@ function FooterLinkList({
 }) {
   return (
     <nav aria-label={title}>
-      <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-slate-900 dark:text-slate-100">{title}</h2>
+      <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-slate-100">{title}</h2>
       <ul className="mt-4 flex flex-col gap-2.5">
         {links.map((link) => (
           <li key={link.label}>
             {link.href.startsWith('mailto:') ? (
-              <a href={link.href} className="text-sm leading-relaxed text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">
+              <a href={link.href} className="text-sm leading-relaxed text-slate-400 transition-colors hover:text-white">
                 {link.label}
               </a>
             ) : (
-              <Link to={link.href} className="text-sm leading-relaxed text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">
+              <Link to={link.href} className="text-sm leading-relaxed text-slate-400 transition-colors hover:text-white">
                 {link.label}
               </Link>
             )}
@@ -85,7 +83,6 @@ function FooterLinkList({
 export function Footer() {
   const reduceMotion = usePrefersReducedMotion();
   const phoneNumbers = contact.phones.slice(0, 3);
-  const { theme } = useTheme();
 
   return (
     <motion.footer
@@ -94,19 +91,19 @@ export function Footer() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.1 }}
       transition={{ duration: reduceMotion ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="relative z-30 m-0 flex h-auto min-h-screen w-full flex-col overflow-visible border-t border-slate-200 bg-slate-50 p-0 text-slate-900 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+      className="relative z-30 m-0 flex h-auto min-h-screen w-full flex-col overflow-visible border-t border-slate-800 bg-black p-0 text-slate-100"
     >
-      <section className="border-b border-slate-200 bg-slate-50 px-6 pb-8 pt-24 dark:border-slate-800 dark:bg-slate-950 lg:px-12 lg:pb-10 lg:pt-28">
+      <section className="border-b border-slate-800 bg-black px-6 pb-8 pt-24 lg:px-12 lg:pb-10 lg:pt-28">
         <div className="mx-auto grid max-w-[1400px] gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             <div className="flex items-start gap-3">
               <ContactIcon name="phone" />
               <div>
-                <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-slate-900 dark:text-slate-100">Téléphone</h2>
+                <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-slate-100">Téléphone</h2>
                 <ul className="mt-2 space-y-1">
                   {phoneNumbers.map((phone) => (
                     <li key={phone}>
-                      <a href={`tel:${phone.replace(/\s+/g, '')}`} className="text-sm text-slate-600 transition-colors hover:text-slate-950 dark:text-slate-400 dark:hover:text-white">
+                      <a href={`tel:${phone.replace(/\s+/g, '')}`} className="text-sm text-slate-400 transition-colors hover:text-white">
                         {phone}
                       </a>
                     </li>
@@ -118,16 +115,16 @@ export function Footer() {
             <div className="flex items-start gap-3">
               <ContactIcon name="pin" />
               <div>
-                <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-slate-900 dark:text-slate-100">Adresse</h2>
-                <p className="mt-2 max-w-[230px] text-sm leading-relaxed text-slate-600 dark:text-slate-400">{contact.address}</p>
+                <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-slate-100">Adresse</h2>
+                <p className="mt-2 max-w-[230px] text-sm leading-relaxed text-slate-400">{contact.address}</p>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
               <ContactIcon name="mail" />
               <div>
-                <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-slate-900 dark:text-slate-100">Email</h2>
-                <a href={`mailto:${contact.email}`} className="mt-2 inline-block break-all text-sm text-slate-600 transition-colors hover:text-slate-950 dark:text-slate-400 dark:hover:text-white">
+                <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-slate-100">Email</h2>
+                <a href={`mailto:${contact.email}`} className="mt-2 inline-block break-all text-sm text-slate-400 transition-colors hover:text-white">
                   {contact.email}
                 </a>
               </div>
@@ -136,8 +133,8 @@ export function Footer() {
             <div className="flex items-start gap-3">
               <ContactIcon name="clock" />
               <div>
-                <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-slate-900 dark:text-slate-100">Horaires</h2>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-slate-100">Horaires</h2>
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">
                   Lun - Ven: 07h30 - 17h00
                   <br />
                   Sam: 07h30 - 13h00
@@ -155,13 +152,17 @@ export function Footer() {
         </div>
       </section>
 
-      <section className="bg-slate-50 px-6 py-10 dark:bg-slate-950 lg:px-12 lg:py-14">
+      <section className="bg-black px-6 py-10 lg:px-12 lg:py-14">
         <div className="mx-auto grid max-w-[1400px] gap-10 sm:grid-cols-2 lg:grid-cols-[1.1fr_0.8fr_1.5fr_1fr_0.8fr] lg:gap-8">
           <div>
             <Link to="/" aria-label="Soquibat Group — accueil" className="inline-flex">
-              <img src={theme === 'dark' ? whiteLogo : darkLogo} alt="Soquibat Group" className="h-10 w-auto object-contain" />
+              <img
+                src={whiteLogo}
+                alt="Soquibat Group"
+                className="h-16 w-72 max-w-full object-cover object-center"
+              />
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
               Leader dans le domaine de la sidérurgie en Tunisie depuis plus de 40 ans.
             </p>
             <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
@@ -171,7 +172,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-slate-600 transition-colors hover:text-slate-950 dark:text-slate-400 dark:hover:text-white"
+                  className="inline-flex items-center gap-1.5 text-xs text-slate-400 transition-colors hover:text-white"
                 >
                   {social.label}
                   <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" className="h-3 w-3 text-amber-500">
@@ -193,16 +194,16 @@ export function Footer() {
           />
           <FooterLinkList title="Support & légal" links={supportLinks} />
           <div>
-            <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-slate-900 dark:text-slate-100">Contact</h2>
-            <Link to="/contact" className="mt-4 inline-block text-sm text-slate-600 transition-colors hover:text-slate-950 dark:text-slate-400 dark:hover:text-white">
+            <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-slate-100">Contact</h2>
+            <Link to="/contact" className="mt-4 inline-block text-sm text-slate-400 transition-colors hover:text-white">
               Écrivez à notre équipe
             </Link>
           </div>
         </div>
       </section>
 
-      <div className="mt-auto border-t border-slate-200 px-6 py-5 dark:border-slate-800 lg:px-12">
-        <div className="mx-auto flex max-w-[1400px] flex-col gap-2 text-xs text-slate-600 dark:text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-auto border-t border-slate-800 px-6 py-5 lg:px-12">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-2 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
           <p>Copyright © SOQUIBAT Group. All rights reserved.</p>
         </div>
       </div>

@@ -50,7 +50,7 @@ export function CompanyStorySection() {
               <p>{company.description}</p>
             </Reveal>
             <Reveal delay={0.2} className="mt-10">
-              <CTAButton href="https://soquibat.tn/groupe" external>
+              <CTAButton href="/groupe">
                 En savoir plus
               </CTAButton>
             </Reveal>

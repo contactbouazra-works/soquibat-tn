@@ -45,7 +45,7 @@ export const company = {
 
 export const nav = [
   { label: 'Nos produits', href: '/produits' },
-  { label: 'Groupe', href: '/#histoire' },
+  { label: 'Groupe', href: '/groupe' },
   { label: 'Actualités', href: '/actualites' },
   { label: 'Recrutement', href: '/recrutement' },
   { label: 'Contact', href: '/contact' },
@@ -296,7 +296,24 @@ export const international = {
   image: heroOssature,
 };
 
-export const careers = [
+export type CareerPosting = {
+  slug: string;
+  title: string;
+  roleTitle: string;
+  department: string;
+  contractType: string;
+  location: string;
+  date: string;
+  href?: string;
+  image: string;
+  status: 'archive' | 'unconfirmed';
+  excerpt: string;
+  responsibilities: string[];
+  profile: string[];
+  skills: string[];
+};
+
+export const careers: CareerPosting[] = [
   {
     slug: 'Transit',
     title: 'Transit',
@@ -307,7 +324,7 @@ export const careers = [
     date: '16-11-2023',
     href: 'https://soquibat.tn/recrutement/Transit',
     image: career1,
-    active: false,
+    status: 'archive',
     excerpt: 'SOQUIBAT Group recherchait une personne dynamique et autonome pour un poste à temps plein à Djebel El Ouest.',
     responsibilities: [],
     profile: ['Personne dynamique et autonome'],
@@ -323,7 +340,7 @@ export const careers = [
     date: '16-11-2023',
     href: 'https://soquibat.tn/recrutement/QHSE',
     image: career2,
-    active: false,
+    status: 'archive',
     excerpt: 'Une ancienne annonce portant sur le déploiement de la politique qualité, hygiène, sécurité et environnement du groupe.',
     responsibilities: [
       'Coordonner les activités et les équipes QHSE.',
@@ -343,7 +360,7 @@ export const careers = [
     date: '19-09-2023',
     href: 'https://soquibat.tn/recrutement/SI',
     image: career3,
-    active: false,
+    status: 'archive',
     excerpt: 'Une ancienne annonce consacrée au suivi de projets ERP, à l’accompagnement des utilisateurs et à l’évolution des systèmes d’information.',
     responsibilities: [
       'Suivre le déploiement des modules ERP et coordonner les intervenants.',
@@ -358,6 +375,51 @@ export const careers = [
     ],
     skills: [],
   },
+  {
+    slug: 'ingenieur-genie-industriel',
+    title: 'Ingénieur Génie Industriel',
+    roleTitle: 'Ingénieur Génie Industriel',
+    department: 'Génie industriel',
+    contractType: 'À confirmer',
+    location: 'À confirmer',
+    date: 'Non précisée',
+    image: career1,
+    status: 'unconfirmed',
+    excerpt: 'Intitulé de poste à confirmer auprès de SOQUIBAT Group. Les responsabilités et les critères de candidature ne sont pas encore publiés.',
+    responsibilities: [],
+    profile: [],
+    skills: [],
+  },
+  {
+    slug: 'agents-commerciaux',
+    title: 'Agents Commerciaux',
+    roleTitle: 'Agents Commerciaux',
+    department: 'Commercial',
+    contractType: 'À confirmer',
+    location: 'À confirmer',
+    date: 'Non précisée',
+    image: career2,
+    status: 'unconfirmed',
+    excerpt: 'Intitulé de poste à confirmer auprès de SOQUIBAT Group. Les responsabilités et les critères de candidature ne sont pas encore publiés.',
+    responsibilities: [],
+    profile: [],
+    skills: [],
+  },
+  {
+    slug: 'technicien-de-maintenance',
+    title: 'Technicien de Maintenance',
+    roleTitle: 'Technicien de Maintenance',
+    department: 'Maintenance',
+    contractType: 'À confirmer',
+    location: 'À confirmer',
+    date: 'Non précisée',
+    image: career3,
+    status: 'unconfirmed',
+    excerpt: 'Intitulé de poste à confirmer auprès de SOQUIBAT Group. Les responsabilités et les critères de candidature ne sont pas encore publiés.',
+    responsibilities: [],
+    profile: [],
+    skills: [],
+  },
 ];
 
 export const news = [
@@ -365,7 +427,7 @@ export const news = [
     slug: 'chez-soquibat-group-l-inclusion-se-vit-au-quotidien',
     detailTitle: 'Chez SOQUIBAT GROUP, l’inclusion se vit au quotidien',
     tag: 'Communiqué de presse',
-    categories: ['Communiqué de presse', 'RH & Inclusivité'],
+    categories: ['Communiqué de presse', 'RSE & Inclusivité'],
     title: 'Les talents féminins au cœur de notre dynamique industrielle',
     date: '06-03-2026',
     excerpt:
@@ -428,7 +490,7 @@ export const socials = [
 ];
 
 export const footerLinks = [
-  { label: 'Groupe', href: '/#histoire' },
+  { label: 'Groupe', href: '/groupe' },
   { label: 'Produits', href: '/produits' },
   { label: 'Actualités', href: '/actualites' },
   { label: 'Carrière', href: '/recrutement' },

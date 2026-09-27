@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { ThemeContext, type Theme, type ThemePreference, type ThemeContextValue } from './themeContext';
 
 const THEME_STORAGE_KEY = 'soquibat-theme';
@@ -17,6 +17,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [preference, setPreference] = useState<ThemePreference>(getInitialPreference);
   const [systemTheme, setSystemTheme] = useState<Theme>(getSystemTheme);
   const theme = preference === 'system' ? systemTheme : preference;
+  const previousThemeRef = useRef(theme);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
@@ -28,8 +29,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const root = document.documentElement;
     root.dataset.theme = theme;
+    root.style.colorScheme = theme;
+
+    if (previousThemeRef.current === theme) return;
+
     root.classList.add('theme-transition');
     const transitionTimeout = window.setTimeout(() => root.classList.remove('theme-transition'), 350);
+    previousThemeRef.current = theme;
     return () => window.clearTimeout(transitionTimeout);
   }, [theme]);
 

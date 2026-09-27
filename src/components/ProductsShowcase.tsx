@@ -90,8 +90,10 @@ function ProductImage({ active, reduceMotion }: { active: number; reduceMotion: 
         ))}
       </AnimatePresence>
       <div className="pointer-events-none absolute left-4 top-4 h-7 w-7 border-l-2 border-t-2 border-orange" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 to-transparent px-5 pb-5 pt-14">
-        <p className="font-display text-xl uppercase text-white sm:text-2xl">{product.name}</p>
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-white/95 via-white/60 to-transparent px-5 pb-5 pt-14 dark:from-slate-950/90 dark:via-slate-900/55">
+        <p className="font-display text-xl uppercase text-slate-900 drop-shadow-[0_2px_4px_rgba(0,0,0,0.12)] dark:text-white dark:drop-shadow-none sm:text-2xl">
+          {product.name}
+        </p>
       </div>
     </div>
   );

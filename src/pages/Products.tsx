@@ -43,20 +43,20 @@ export function Products() {
                   />
                   <motion.div
                     aria-hidden="true"
-                    className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/85 via-black/30 to-transparent"
+                    className="absolute inset-0 rounded-2xl bg-gradient-to-t from-white/95 via-white/55 to-transparent dark:from-slate-950/90 dark:via-slate-900/40"
                     variants={{ rest: { opacity: 0.72 }, hover: { opacity: 1 } }}
                     transition={{ duration: 0.3 }}
                   />
                   <div className="absolute inset-x-0 bottom-0 flex flex-col justify-end p-4 sm:p-6">
                     <span className="mb-2 h-0.5 w-10 bg-amber-500" />
-                    <h2 className="font-display text-lg uppercase text-white sm:text-xl">
+                    <h2 className="font-display text-lg uppercase text-slate-900 drop-shadow-[0_2px_4px_rgba(0,0,0,0.12)] dark:text-white dark:drop-shadow-none sm:text-xl">
                       {product.name}
                     </h2>
-                    <span className="mt-1 font-display text-xs uppercase tracking-[0.14em] text-white/70">
+                    <span className="mt-1 font-display text-xs uppercase tracking-[0.14em] text-slate-700 dark:text-slate-300">
                       {product.referenceCount} {product.referenceCount === 1 ? 'référence' : 'références'}
                     </span>
                     <motion.p
-                      className="mt-2 text-sm text-slate-200"
+                      className="mt-2 text-sm text-slate-700 dark:text-slate-200"
                       variants={{ rest: { y: 20, opacity: 0 }, hover: { y: 0, opacity: 1 } }}
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >

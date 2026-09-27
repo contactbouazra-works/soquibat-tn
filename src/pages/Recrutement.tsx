@@ -13,7 +13,13 @@ export function Recrutement() {
   const [location, setLocation] = useState('Tous');
   const departments = [...new Set(careers.map((job) => job.department))];
   const contractTypes = [...new Set(careers.map((job) => job.contractType))];
-  const locations = [...new Set(careers.map((job) => job.location))];
+  const locations = [...new Set([
+    'Ariana',
+    'Jbel Ouest',
+    'Sfax',
+    'Tunis',
+    ...careers.map((job) => job.location === 'Djebel El Ouest' ? 'Jbel Ouest' : job.location),
+  ])];
 
   const matchingJobs = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase('fr');
@@ -21,7 +27,7 @@ export function Recrutement() {
       (!normalizedQuery || `${job.roleTitle} ${job.department}`.toLocaleLowerCase('fr').includes(normalizedQuery))
       && (department === 'Tous' || job.department === department)
       && (contractType === 'Tous' || job.contractType === contractType)
-      && (location === 'Tous' || job.location === location)
+      && (location === 'Tous' || normalizeLocation(job.location) === normalizeLocation(location))
     ));
   }, [contractType, department, location, query]);
 
@@ -42,7 +48,7 @@ export function Recrutement() {
                 Rejoignez SOQUIBAT Group
               </h1>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-paper/70 sm:text-lg">
-                Retrouvez les publications de recrutement du groupe. Les annonces affichées ci-dessous sont des archives ; leur disponibilité actuelle n’est pas confirmée.
+                Consultez les publications archivées et les intitulés de postes à confirmer. La disponibilité des opportunités doit être vérifiée auprès du groupe.
               </p>
             </div>
           </section>
@@ -52,7 +58,7 @@ export function Recrutement() {
               <div>
                 <p className="font-display text-xs uppercase tracking-[0.18em] text-orange">Opportunités</p>
                 <h2 id="offers-title" className="mt-2 font-display text-3xl uppercase sm:text-4xl">
-                  Publications de recrutement
+                  Offres &amp; publications
                 </h2>
               </div>
               <a
@@ -64,7 +70,7 @@ export function Recrutement() {
             </div>
 
             <p className="mt-5 rounded-xl border border-orange/30 bg-ink-soft px-4 py-3 text-sm leading-relaxed text-paper/70">
-              Les annonces visibles sont des archives publiées en 2023 ; aucune offre active n’est confirmée ici. Contactez-nous pour connaître les recrutements en cours.
+              Les postes marqués « Archive » sont des annonces historiques. Les postes marqués « À confirmer » ont été mentionnés sans détails officiels disponibles ; aucun poste n’est présenté comme actif sans confirmation.
             </p>
 
             <div className="mt-7 grid gap-4 rounded-2xl border border-line bg-ink-soft p-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -104,23 +110,27 @@ export function Recrutement() {
                           <span className="rounded-full border border-orange/40 px-3 py-1 text-xs text-orange">
                             {job.department}
                           </span>
-                          <span className="rounded-full border border-line px-3 py-1 text-xs text-paper/60">Archive</span>
+                          <span className="rounded-full border border-line px-3 py-1 text-xs text-paper/60">
+                            {job.status === 'archive' ? 'Archive' : 'À confirmer'}
+                          </span>
                         </div>
                         <h3 className="mt-4 font-display text-xl uppercase">{job.roleTitle}</h3>
                         <p className="mt-2 text-sm leading-relaxed text-paper/70">{job.excerpt}</p>
                         <dl className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs text-paper/60">
                           <div><dt className="sr-only">Contrat</dt><dd>{job.contractType}</dd></div>
                           <div><dt className="sr-only">Lieu</dt><dd>{job.location}</dd></div>
-                          <div>
-                            <dt className="sr-only">Date de publication</dt>
-                            <dd><time dateTime={toDateTime(job.date)}>{formatFrenchDate(job.date)}</time></dd>
-                          </div>
+                          {job.date !== 'Non précisée' && (
+                            <div>
+                              <dt className="sr-only">Date de publication</dt>
+                              <dd><time dateTime={toDateTime(job.date)}>{formatFrenchDate(job.date)}</time></dd>
+                            </div>
+                          )}
                         </dl>
                         <Link
                           to={`/recrutement/${encodeURIComponent(job.slug)}`}
                           className="mt-5 inline-flex items-center gap-2 self-start font-display text-sm uppercase tracking-wide text-orange hover:text-orange-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
                         >
-                          Voir l’archive <span aria-hidden="true">→</span>
+                          {job.status === 'archive' ? 'Voir l’archive' : 'Voir les détails'} <span aria-hidden="true">→</span>
                         </Link>
                       </div>
                     </article>
@@ -152,6 +162,12 @@ export function Recrutement() {
       </main>
     </>
   );
+}
+
+function normalizeLocation(locationName: string) {
+  return locationName
+    .toLocaleLowerCase('fr')
+    .replace(/^djebel\s+el\s+ouest$/, 'jbel ouest');
 }
 
 function FilterSelect({
@@ -210,7 +226,7 @@ export function RecrutementDetail() {
     <>
       <Seo
         title={`${job.roleTitle} | Recrutement SOQUIBAT Group`}
-        description={`${job.excerpt} Publication du ${formatFrenchDate(job.date)}. Consultez les détails et contactez SOQUIBAT Group.`}
+        description={`${job.excerpt}${job.date !== 'Non précisée' ? ` Publication du ${formatFrenchDate(job.date)}.` : ''} Consultez les détails et contactez SOQUIBAT Group.`}
         path={canonicalPath}
         image={job.image}
       />
@@ -227,7 +243,7 @@ export function RecrutementDetail() {
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px]">
             <article>
               <span className="inline-flex rounded-full border border-orange/40 px-3 py-1 font-display text-xs uppercase tracking-[0.12em] text-orange">
-                Publication archivée — disponibilité non confirmée
+                {job.status === 'archive' ? 'Publication archivée — disponibilité non confirmée' : 'Poste à confirmer'}
               </span>
               <h1 className="mt-5 font-display text-3xl uppercase leading-tight sm:text-4xl lg:text-5xl">{job.roleTitle}</h1>
               <p className="mt-4 max-w-3xl text-base leading-relaxed text-paper/70">{job.excerpt}</p>
@@ -236,7 +252,7 @@ export function RecrutementDetail() {
                 <JobFact label="Service" value={job.department} />
                 <JobFact label="Type de contrat" value={job.contractType} />
                 <JobFact label="Lieu" value={job.location} />
-                <JobFact label="Publication" value={formatFrenchDate(job.date)} />
+                {job.date !== 'Non précisée' && <JobFact label="Publication" value={formatFrenchDate(job.date)} />}
                 <JobFact label="Disponibilité" value="Poste non confirmé comme ouvert" />
               </dl>
 
@@ -253,15 +269,19 @@ export function RecrutementDetail() {
             </article>
 
             <aside className="h-fit rounded-2xl border border-line bg-ink-soft p-5 lg:sticky lg:top-28">
-              <p className="font-display text-lg uppercase">Cette annonce date de 2023</p>
+              <p className="font-display text-lg uppercase">
+                {job.status === 'archive' ? 'Annonce historique' : 'Détails à confirmer'}
+              </p>
               <p className="mt-3 text-sm leading-relaxed text-paper/70">
-                Nous ne pouvons pas confirmer que le poste est toujours disponible. Contactez-nous avant de préparer une candidature pour cette offre.
+                {job.status === 'archive'
+                  ? `Cette annonce date du ${formatFrenchDate(job.date)}. Nous ne pouvons pas confirmer que le poste est toujours disponible.`
+                  : 'Les missions, conditions et disponibilité de ce poste n’ont pas été confirmées. Contactez SOQUIBAT avant de déposer un dossier.'}
               </p>
               <Link
                 to={`/recrutement/${encodeURIComponent(job.slug)}/postuler`}
                 className="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-md bg-orange px-4 py-3 text-center text-sm font-semibold text-slate-950 hover:bg-orange-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
               >
-                Vérifier et postuler
+                Vérifier avant de postuler
               </Link>
               <Link to="/recrutement" className="mt-4 inline-flex text-sm text-orange underline underline-offset-4">
                 Toutes les publications

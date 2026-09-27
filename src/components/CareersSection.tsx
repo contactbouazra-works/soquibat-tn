@@ -38,7 +38,9 @@ export function CareersSection() {
                 <span className="mt-5 font-display text-2xl uppercase text-slate-900 transition-colors group-hover:text-orange dark:text-slate-100 lg:text-3xl">
                   {job.roleTitle}
                 </span>
-                <span className="mt-1 text-sm text-slate-600 dark:text-slate-400">{formatFrenchDate(job.date)} · Archive</span>
+                <span className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+                  {job.date === 'Non précisée' ? 'Disponibilité à confirmer' : `${formatFrenchDate(job.date)} · Archive`}
+                </span>
               </Link>
             </Reveal>
           ))}
