@@ -42,7 +42,15 @@ function ContactIcon({ name }: { name: ContactIconName }) {
   );
 }
 
-function FooterLinkList({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+function FooterLinkList({
+  title,
+  links,
+  moreHref,
+}: {
+  title: string;
+  links: { label: string; href: string }[];
+  moreHref?: string;
+}) {
   return (
     <nav aria-label={title}>
       <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-white">{title}</h2>
@@ -60,6 +68,13 @@ function FooterLinkList({ title, links }: { title: string; links: { label: strin
             )}
           </li>
         ))}
+        {moreHref && (
+          <li>
+            <Link to={moreHref} className="text-sm font-semibold text-amber-500 transition-colors hover:text-amber-400">
+              Voir plus
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );
@@ -76,9 +91,9 @@ export function Footer() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.1 }}
       transition={{ duration: reduceMotion ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="relative z-30 m-0 h-auto min-h-screen w-full overflow-visible border-t border-neutral-800 bg-black p-0 text-white"
+      className="relative z-30 m-0 flex h-auto min-h-screen w-full flex-col overflow-visible border-t border-neutral-800 bg-black p-0 text-white"
     >
-      <section className="border-b border-white/10 bg-black px-6 py-8 lg:px-12 lg:py-10">
+      <section className="border-b border-white/10 bg-black px-6 pb-8 pt-24 lg:px-12 lg:pb-10 lg:pt-28">
         <div className="mx-auto grid max-w-[1400px] gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             <div className="flex items-start gap-3">
@@ -167,10 +182,11 @@ export function Footer() {
           <FooterLinkList title="Groupe" links={companyLinks} />
           <FooterLinkList
             title="Produits"
-            links={products.map((product) => ({
+            links={products.slice(0, 6).map((product) => ({
               label: product.name,
               href: `/produits/${encodeURIComponent(product.slug)}`,
             }))}
+            moreHref="/produits"
           />
           <FooterLinkList title="Support & légal" links={supportLinks} />
           <div>
@@ -182,13 +198,13 @@ export function Footer() {
         </div>
       </section>
 
-      <div className="border-t border-white/10 px-6 py-5 lg:px-12">
+      <div className="mt-auto border-t border-white/10 px-6 py-5 lg:px-12">
         <div className="mx-auto flex max-w-[1400px] flex-col gap-2 text-xs text-neutral-400 sm:flex-row sm:items-center sm:justify-between">
           <p>Copyright © SOQUIBAT Group. All rights reserved.</p>
           <p>
             Designed by{' '}
-            <a href="https://solidwall.com.tn/" target="_blank" rel="noreferrer" className="transition-colors hover:text-amber-500">
-              SolidwallConsulting
+            <a href="https://portfolio-aymen-bouazra.vercel.app/" target="_blank" rel="noreferrer" className="transition-colors hover:text-amber-500">
+              Aymen BOUAZRA
             </a>
           </p>
         </div>

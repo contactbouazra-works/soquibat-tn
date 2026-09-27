@@ -101,7 +101,7 @@ function StaticProductsShowcase({ reduceMotion }: { reduceMotion: boolean }) {
   const [active, setActive] = useState(0);
 
   return (
-    <section data-products-showcase className="relative bg-ink px-6 py-20 lg:px-12 lg:py-28" aria-labelledby="products-heading">
+    <section id="produits" data-products-showcase className="relative bg-ink px-6 py-20 lg:px-12 lg:py-28" aria-labelledby="products-heading">
       <div className="dot-grid pointer-events-none absolute inset-0 opacity-20" aria-hidden="true" />
       <div className="relative mx-auto max-w-[1400px]">
         <ProductsHeading reduceMotion={reduceMotion} />
@@ -162,6 +162,7 @@ export function ProductsShowcase() {
   return (
     <section
       ref={ref}
+      id="produits"
       data-products-showcase
       data-active-product-index={active}
       data-product-count={products.length}

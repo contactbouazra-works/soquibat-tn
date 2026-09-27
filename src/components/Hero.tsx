@@ -1,6 +1,5 @@
 import { animate, motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { company, heroSlides } from '../data/soquibat';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 import { CTAButton } from './CTAButton';
@@ -22,8 +21,10 @@ const HERO_STEP_DURATION = 0.7;
 const HERO_STEP_DEBOUNCE = 750;
 const WHEEL_THRESHOLD = 18;
 const heroNavigation = [
-  { label: 'Produits', to: '/produits' },
-  { label: 'Références & projets', to: '/#points-de-vente' },
+  { label: 'Produits', to: '/#produits' },
+  { label: 'Le groupe', to: '/#histoire' },
+  { label: 'Implantations', to: '/#points-de-vente' },
+  { label: 'Actualités', to: '/#actualites' },
   { label: 'Carrière', to: '/#recrutement' },
   { label: 'Contact', to: '/contact' },
 ];
@@ -354,8 +355,8 @@ export function Hero() {
             <ul className="space-y-3 sm:space-y-5">
               {heroNavigation.map((item, index) => (
                 <li key={item.label}>
-                  <Link
-                    to={item.to}
+                  <a
+                    href={item.to}
                     className="group flex items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange sm:gap-5"
                   >
                     <span className="font-display text-xs text-orange/70 sm:text-sm">0{index + 1}</span>
@@ -368,7 +369,7 @@ export function Hero() {
                     <span className="ml-auto text-lg text-orange opacity-0 transition-opacity group-hover:opacity-100" aria-hidden="true">
                       →
                     </span>
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

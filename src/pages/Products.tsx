@@ -46,6 +46,9 @@ export function Products() {
                     <h2 className="font-display text-lg uppercase text-white sm:text-xl">
                       {product.name}
                     </h2>
+                    <span className="mt-1 font-display text-xs uppercase tracking-[0.14em] text-white/70">
+                      {product.referenceCount} {product.referenceCount === 1 ? 'référence' : 'références'}
+                    </span>
                     <motion.p
                       className="mt-2 text-sm text-slate-200"
                       variants={{ rest: { y: 20, opacity: 0 }, hover: { y: 0, opacity: 1 } }}

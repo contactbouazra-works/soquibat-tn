@@ -11,20 +11,30 @@ import { Contact } from './pages/Contact';
 import { ThemeProvider } from './context/ThemeProvider';
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0 });
-  }, [pathname]);
+    if (!hash) window.scrollTo({ top: 0 });
+  }, [pathname, hash]);
   return null;
 }
 
 function PageTransition({ children }: { children: ReactNode }) {
+  const { hash } = useLocation();
+
   return (
     <motion.main
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -16 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      onAnimationComplete={() => {
+        const target = hash && document.getElementById(hash.slice(1));
+        if (target) {
+          target.scrollIntoView({
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          });
+        }
+      }}
     >
       {children}
     </motion.main>

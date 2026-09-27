@@ -30,6 +30,29 @@
 
 * {
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.4) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 9999px;
+  background-color: rgba(155, 155, 155, 0.4);
+  background-clip: padding-box;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(155, 155, 155, 0.7);
 }
 
 html {
@@ -128,117 +151,6 @@ a {
 .outline-text {
   color: transparent;
   -webkit-text-stroke: 1px rgba(245, 244, 241, 0.55);
-}
-
-.quote-input {
-  display: block;
-  width: 100%;
-  margin-top: 0.5rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 0.5rem;
-  background: #fff;
-  padding: 0.75rem;
-  color: #0f172a;
-  font-size: 0.875rem;
-  outline: none;
-}
-
-.quote-input:focus {
-  border-color: var(--color-orange);
-  box-shadow: 0 0 0 2px rgb(244 123 32 / 20%);
-}
-
-.product-detail {
-  min-height: 100vh;
-  color: var(--color-paper);
-  background-color: var(--color-ink);
-  background-size: 18px 18px;
-}
-
-:root[data-theme='dark'] .product-detail {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-}
-
-:root[data-theme='light'] .product-detail {
-  background-image: radial-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px);
-}
-
-:root[data-theme='dark'] .product-detail [class~="bg-white"],
-:root[data-theme='dark'] .product-detail [class~="bg-white/95"] {
-  background-color: var(--color-ink-soft);
-}
-
-:root[data-theme='dark'] .product-detail [class~="bg-slate-50"],
-:root[data-theme='dark'] .product-detail [class~="bg-[#edf1f4]"],
-:root[data-theme='dark'] .product-detail [class~="bg-[#e9eef2]"],
-:root[data-theme='dark'] .product-detail [class~="bg-[#f8fafc]"] {
-  background-color: #202226;
-}
-
-:root[data-theme='dark'] .product-detail [class~="bg-[#17324d]"] {
-  background-color: var(--color-ink-soft);
-}
-
-:root[data-theme='dark'] .product-detail .product-detail-page-surface {
-  background-color: #000;
-}
-
-:root[data-theme='dark'] .product-detail [class~="text-[#17324d]"],
-:root[data-theme='dark'] .product-detail [class~="text-[#142d45]"],
-:root[data-theme='dark'] .product-detail [class~="text-slate-900"],
-:root[data-theme='dark'] .product-detail [class~="text-slate-800"],
-:root[data-theme='dark'] .product-detail [class~="text-slate-700"] {
-  color: var(--color-paper);
-}
-
-:root[data-theme='dark'] .product-detail [class~="text-slate-600"],
-:root[data-theme='dark'] .product-detail [class~="text-slate-500"] {
-  color: rgba(245, 244, 241, 0.68);
-}
-
-:root[data-theme='dark'] .product-detail [class~="border-slate-200"],
-:root[data-theme='dark'] .product-detail [class~="border-slate-300"] {
-  border-color: var(--color-line);
-}
-
-:root[data-theme='dark'] .product-detail [class~="border-emerald-200"] {
-  border-color: rgba(244, 123, 32, 0.38);
-}
-
-:root[data-theme='dark'] .product-detail [class~="bg-emerald-50"] {
-  background-color: rgba(244, 123, 32, 0.12);
-}
-
-:root[data-theme='dark'] .product-detail [class~="text-emerald-800"] {
-  color: #ffc08a;
-}
-
-:root[data-theme='dark'] .product-detail input,
-:root[data-theme='dark'] .product-detail select,
-:root[data-theme='dark'] .product-detail textarea {
-  color-scheme: dark;
-}
-
-:root[data-theme='dark'] .product-detail input:not(.quote-input),
-:root[data-theme='dark'] .product-detail select:not(.quote-input),
-:root[data-theme='dark'] .product-detail textarea:not(.quote-input) {
-  border-color: var(--color-line);
-  background-color: #202226;
-  color: var(--color-paper);
-}
-
-:root[data-theme='dark'] .product-detail .quote-input {
-  border-color: var(--color-line);
-  background-color: #202226;
-  color: var(--color-paper);
-}
-
-:root[data-theme='dark'] .product-detail .quote-input::placeholder {
-  color: rgba(245, 244, 241, 0.45);
-}
-
-:root[data-theme='dark'] .product-detail [class~="hover:bg-slate-50"]:hover {
-  background-color: #202226;
 }
 
 @media (max-width: 768px) {
