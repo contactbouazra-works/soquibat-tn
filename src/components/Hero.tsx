@@ -24,8 +24,8 @@ const heroNavigation = [
   { label: 'Produits', to: '/#produits' },
   { label: 'Le groupe', to: '/#histoire' },
   { label: 'Implantations', to: '/#points-de-vente' },
-  { label: 'Actualités', to: '/#actualites' },
-  { label: 'Carrière', to: '/#recrutement' },
+  { label: 'Actualités', to: '/actualites' },
+  { label: 'Carrière', to: '/recrutement' },
   { label: 'Contact', to: '/contact' },
 ];
 

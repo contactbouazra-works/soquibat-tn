@@ -46,8 +46,8 @@ export const company = {
 export const nav = [
   { label: 'Nos produits', href: '/produits' },
   { label: 'Groupe', href: '/#histoire' },
-  { label: 'Actualités', href: '/#actualites' },
-  { label: 'Recrutement', href: '/#recrutement' },
+  { label: 'Actualités', href: '/actualites' },
+  { label: 'Recrutement', href: '/recrutement' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -297,35 +297,115 @@ export const international = {
 };
 
 export const careers = [
-  { title: 'Transit', date: '16-11-2023', href: 'https://soquibat.tn/recrutement/Transit', image: career1 },
-  { title: 'QHSE', date: '16-11-2023', href: 'https://soquibat.tn/recrutement/QHSE', image: career2 },
-  { title: 'SI', date: '19-09-2023', href: 'https://soquibat.tn/recrutement/SI', image: career3 },
+  {
+    slug: 'Transit',
+    title: 'Transit',
+    roleTitle: 'Chargé(e) Transit',
+    department: 'Transit',
+    contractType: 'Non précisé',
+    location: 'Djebel El Ouest',
+    date: '16-11-2023',
+    href: 'https://soquibat.tn/recrutement/Transit',
+    image: career1,
+    active: false,
+    excerpt: 'SOQUIBAT Group recherchait une personne dynamique et autonome pour un poste à temps plein à Djebel El Ouest.',
+    responsibilities: [],
+    profile: ['Personne dynamique et autonome'],
+    skills: [],
+  },
+  {
+    slug: 'QHSE',
+    title: 'QHSE',
+    roleTitle: 'Responsable QHSE',
+    department: 'QHSE',
+    contractType: 'Non précisé',
+    location: 'Djebel El Ouest',
+    date: '16-11-2023',
+    href: 'https://soquibat.tn/recrutement/QHSE',
+    image: career2,
+    active: false,
+    excerpt: 'Une ancienne annonce portant sur le déploiement de la politique qualité, hygiène, sécurité et environnement du groupe.',
+    responsibilities: [
+      'Coordonner les activités et les équipes QHSE.',
+      'Contribuer à la politique du groupe et suivre les démarches d’amélioration continue.',
+      'Suivre les indicateurs, organiser les formations et réaliser des audits de sécurité.',
+    ],
+    profile: ['Personne dynamique et autonome'],
+    skills: [],
+  },
+  {
+    slug: 'SI',
+    title: 'SI',
+    roleTitle: 'Responsable des Systèmes d’information',
+    department: 'Systèmes d’information',
+    contractType: 'Non précisé',
+    location: 'Djebel El Ouest',
+    date: '19-09-2023',
+    href: 'https://soquibat.tn/recrutement/SI',
+    image: career3,
+    active: false,
+    excerpt: 'Une ancienne annonce consacrée au suivi de projets ERP, à l’accompagnement des utilisateurs et à l’évolution des systèmes d’information.',
+    responsibilities: [
+      'Suivre le déploiement des modules ERP et coordonner les intervenants.',
+      'Analyser les besoins métier, accompagner les utilisateurs et contribuer à la formation.',
+      'Participer aux interfaces, au reporting et au traitement des dysfonctionnements.',
+    ],
+    profile: [
+      'Diplôme d’ingénieur.',
+      'Connaissances générales en informatique et outils de développement.',
+      'Expérience en administration ERP ; une expérience SAGE X3 est mentionnée comme préférable.',
+      'Connaissance des outils de reporting, notamment Power BI et Excel.',
+    ],
+    skills: [],
+  },
 ];
 
 export const news = [
   {
+    slug: 'chez-soquibat-group-l-inclusion-se-vit-au-quotidien',
+    detailTitle: 'Chez SOQUIBAT GROUP, l’inclusion se vit au quotidien',
     tag: 'Communiqué de presse',
+    categories: ['Communiqué de presse', 'RH & Inclusivité'],
     title: 'Les talents féminins au cœur de notre dynamique industrielle',
     date: '06-03-2026',
     excerpt:
       "À l'occasion de la Journée internationale des droits des femmes, Soquibat Group réaffirme son engagement...",
     image: news1,
+    content: [
+      'À l’occasion de la Journée internationale des droits des femmes, SOQUIBAT met en lumière la place grandissante des femmes dans les métiers de l’industrie et leur contribution à la vie du groupe.',
+      'Leurs compétences s’expriment dans des domaines variés, de l’ingénierie et la production à la qualité, la gestion de projets et les fonctions support.',
+      'Le groupe rappelle son engagement en faveur du respect, de l’égalité des opportunités et de la valorisation des parcours professionnels.',
+    ],
   },
   {
+    slug: 'retour-sur-notre-team-building-un-moment-de-partage-et-de-cohesion',
+    detailTitle: 'Retour sur notre team building : un moment de partage et de cohésion',
     tag: 'Évènement',
+    categories: ['Événement'],
     title: 'Retour sur notre team building : un moment de partage et de cohésion',
     date: '02-02-2026',
     excerpt:
       "Dans le cadre de notre engagement à renforcer l'esprit d'équipe et la collaboration, nous avons récemment...",
     image: news2,
+    content: [
+      'SOQUIBAT Group a réuni ses collaborateurs autour d’une journée de team building consacrée aux échanges, à la convivialité et à la cohésion.',
+      'Cette rencontre a permis aux équipes de partager un moment hors du cadre professionnel habituel et de renforcer les liens qui soutiennent le travail collectif.',
+    ],
   },
   {
+    slug: 'tripoli-international-fair-libya',
+    detailTitle: 'Tripoli International Fair, Libya',
     tag: 'Évènement',
+    categories: ['Événement'],
     title: 'Tripoli International Fair, Libya',
     date: '12-05-2025',
     excerpt:
       "Notre filiale TUNISCO, productrice des panneaux isolants et portes de chambres froides, vous invite au salon international du bâtiment...",
     image: news3,
+    content: [
+      'TUNISCO, filiale spécialisée dans les panneaux isolants et les portes de chambres froides, a annoncé sa participation au salon international de la construction à Tripoli.',
+      'L’annonce invitait les visiteurs à rencontrer l’équipe du 12 au 15 mai 2025, dans le hall 6, stand numéro 5, pour découvrir ses produits et services.',
+    ],
   },
 ];
 
@@ -350,8 +430,8 @@ export const socials = [
 export const footerLinks = [
   { label: 'Groupe', href: '/#histoire' },
   { label: 'Produits', href: '/produits' },
-  { label: 'Actualités', href: '/#actualites' },
-  { label: 'Carrière', href: '/#recrutement' },
+  { label: 'Actualités', href: '/actualites' },
+  { label: 'Carrière', href: '/recrutement' },
 ];
 
 export const soquibatData = {

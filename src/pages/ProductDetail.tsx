@@ -20,7 +20,7 @@ export function ProductDetail() {
 
   if (!product) {
     return (
-      <section className="min-h-[65vh] bg-black px-6 pb-24 pt-36 text-white lg:px-12">
+      <section className="min-h-[65vh] bg-ink px-6 pb-24 pt-36 text-paper lg:px-12">
         <Seo
           title="Produit introuvable | SOQUIBAT Group"
           description="Ce produit n’est pas disponible dans le catalogue SOQUIBAT Group. Consultez l’ensemble de nos produits métallurgiques en Tunisie."
@@ -30,7 +30,7 @@ export function ProductDetail() {
         <div className="mx-auto max-w-4xl">
           <p className="font-display text-sm uppercase tracking-[0.18em] text-orange">Catalogue SOQUIBAT</p>
           <h1 className="mt-3 font-display text-4xl">Produit introuvable</h1>
-          <p className="mt-4 text-white/65">Ce produit n’est pas disponible dans le catalogue affiché.</p>
+          <p className="mt-4 text-paper/65">Ce produit n’est pas disponible dans le catalogue affiché.</p>
           <Link className="mt-8 inline-flex font-semibold text-orange underline underline-offset-4" to="/produits">
             Revenir aux produits
           </Link>
@@ -89,7 +89,7 @@ export function ProductDetail() {
   };
 
   return (
-    <section className="min-h-screen bg-black px-6 pb-24 pt-32 text-white lg:px-12 lg:pb-32 lg:pt-40" aria-labelledby="product-title">
+    <section className="min-h-screen bg-ink px-6 pb-24 pt-32 text-paper lg:px-12 lg:pb-32 lg:pt-40" aria-labelledby="product-title">
       <Seo
         title={`${product.name} en Tunisie | SOQUIBAT Group`}
         description={product.description}
@@ -97,12 +97,12 @@ export function ProductDetail() {
         image={product.image}
       />
       <div className="mx-auto max-w-[1400px]">
-        <nav aria-label="Fil d’Ariane" className="mb-10 flex flex-wrap items-center gap-2 text-xs text-white/50 sm:text-sm">
+        <nav aria-label="Fil d’Ariane" className="mb-10 flex flex-wrap items-center gap-2 text-xs text-paper/50 sm:text-sm">
           <Link to="/" className="transition hover:text-orange">Accueil</Link>
           <span aria-hidden="true">/</span>
           <Link to="/produits" className="transition hover:text-orange">Nos produits</Link>
           <span aria-hidden="true">/</span>
-          <span className="text-white/80" aria-current="page">{product.name}</span>
+          <span className="text-paper/80" aria-current="page">{product.name}</span>
         </nav>
 
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
@@ -113,7 +113,7 @@ export function ProductDetail() {
               initial={reduceMotion ? false : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: reduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="relative flex aspect-[4/3] min-h-64 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-neutral-950"
+              className="relative flex aspect-[4/3] min-h-64 items-center justify-center overflow-hidden rounded-2xl border border-line bg-slate-100 dark:bg-slate-950"
             >
               <motion.img
                 key={image}
@@ -177,8 +177,8 @@ export function ProductDetail() {
             {product.references.length > 0 && (
               <div className="mt-5">
                 <div className="mb-3 flex items-center justify-between gap-4">
-                  <h2 className="font-display text-sm uppercase tracking-[0.14em] text-white/60">Images disponibles</h2>
-                  <span className="font-display text-xs text-white/40">
+                  <h2 className="font-display text-sm uppercase tracking-[0.14em] text-paper/60">Images disponibles</h2>
+                  <span className="font-display text-xs text-paper/40">
                     Faites défiler pour tout voir
                   </span>
                 </div>
@@ -190,11 +190,11 @@ export function ProductDetail() {
                       onClick={() => setActiveReferenceIndex(index)}
                       aria-label={`Afficher ${reference.name}`}
                       aria-pressed={activeReferenceIndex === index}
-                      className={`group w-28 shrink-0 snap-start overflow-hidden rounded-lg border bg-neutral-950 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange sm:w-32 ${
-                        activeReferenceIndex === index ? 'border-orange' : 'border-white/10 hover:border-white/40'
+                      className={`group w-28 shrink-0 snap-start overflow-hidden rounded-lg border bg-white text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange dark:bg-slate-950 sm:w-32 ${
+                        activeReferenceIndex === index ? 'border-orange' : 'border-line hover:border-slate-400 dark:hover:border-white/40'
                       }`}
                     >
-                      <span className="flex aspect-[4/3] items-center justify-center overflow-hidden bg-neutral-900 p-2">
+                      <span className="flex aspect-[4/3] items-center justify-center overflow-hidden bg-slate-100 p-2 dark:bg-neutral-900">
                         <img
                           src={reference.image}
                           alt=""
@@ -202,7 +202,7 @@ export function ProductDetail() {
                           className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
                         />
                       </span>
-                      <span className="block truncate px-2 py-2 font-display text-xs uppercase text-white/75">
+                      <span className="block truncate px-2 py-2 font-display text-xs uppercase text-slate-700 dark:text-white/75">
                         {reference.name}
                       </span>
                     </button>
@@ -218,10 +218,10 @@ export function ProductDetail() {
               Produits métallurgiques
             </p>
             <h1 id="product-title" className="font-display text-4xl uppercase leading-[1.02] sm:text-5xl lg:text-6xl">{product.name}</h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-paper/70 sm:text-lg">
               {product.description}
             </p>
-            <p className="mt-8 font-display text-sm uppercase tracking-[0.14em] text-white/50">
+            <p className="mt-8 font-display text-sm uppercase tracking-[0.14em] text-paper/50">
               {product.referenceCount} {product.referenceCount === 1 ? 'référence' : 'références'}
             </p>
           </div>

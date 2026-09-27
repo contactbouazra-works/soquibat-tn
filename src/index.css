@@ -59,6 +59,10 @@ html {
   scroll-behavior: smooth;
 }
 
+:where(#produits, #histoire, #filiales, #points-de-vente, #actualites, #recrutement) {
+  scroll-margin-top: 4.5rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

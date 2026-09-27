@@ -18,23 +18,23 @@ export function SubsidiariesSection() {
         y: { duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] },
         scale: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
       }}
-      className="group relative flex h-full min-h-0 flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border border-white/10 bg-black bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:16px_16px] px-1 py-1 text-center text-white shadow-xl transition-all duration-300 hover:border-amber-500 hover:shadow-2xl sm:gap-3 sm:px-3 sm:py-4"
+      className="group relative flex h-full min-h-0 flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border border-slate-200 bg-white bg-[radial-gradient(rgba(15,23,42,0.07)_1px,transparent_1px)] [background-size:16px_16px] px-1 py-1 text-center text-slate-900 shadow-xl transition-all duration-300 hover:border-amber-500 hover:shadow-2xl dark:border-slate-800 dark:bg-slate-950 dark:bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] dark:text-slate-100 sm:gap-3 sm:px-3 sm:py-4"
     >
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-100 dark:from-white/5"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-slate-900/5 to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-100 dark:from-white/5"
       />
       <span className="relative z-10 flex aspect-square h-full max-h-[68%] w-auto max-w-[86%] items-center justify-center overflow-hidden rounded-xl bg-white/95 p-1 shadow-sm sm:max-h-[62%] sm:p-3">
         <img src={sub.image} alt={`${sub.name} logo`} className="h-full w-full rounded-xl object-contain transition-transform duration-500 group-hover:scale-105" />
       </span>
-      <span className="relative z-10 font-display text-[8px] uppercase tracking-[0.06em] text-white/80 transition-colors group-hover:text-amber-400 sm:text-xs sm:tracking-[0.12em] lg:text-sm">
+      <span className="relative z-10 font-display text-[8px] uppercase tracking-[0.06em] text-slate-700 transition-colors group-hover:text-amber-600 dark:text-slate-300 dark:group-hover:text-amber-400 sm:text-xs sm:tracking-[0.12em] lg:text-sm">
         {sub.name}
       </span>
     </motion.a>
   );
 
   return (
-    <SectionTransition id="filiales" className="flex h-[100svh] min-h-[100svh] flex-col justify-center overflow-hidden bg-slate-50 px-6 py-12 dark:bg-black lg:px-12">
+    <SectionTransition id="filiales" className="flex h-[100svh] min-h-[100svh] flex-col justify-center overflow-hidden bg-slate-50 px-6 py-12 dark:bg-slate-950 lg:px-12">
       <div className="mx-auto flex h-full min-h-0 w-full max-w-[1400px] flex-col justify-center">
         <h2 className="shrink-0 font-display text-sm font-semibold uppercase tracking-[0.2em] text-amber-600 dark:text-amber-500">
           Filiales

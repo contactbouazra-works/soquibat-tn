@@ -9,6 +9,10 @@ import { Products } from './pages/Products';
 import { ProductDetail } from './pages/ProductDetail';
 import { Contact } from './pages/Contact';
 import { ThemeProvider } from './context/ThemeProvider';
+import { Actualites } from './pages/Actualites';
+import { ActualiteDetail } from './pages/ActualiteDetail';
+import { Recrutement, RecrutementDetail } from './pages/Recrutement';
+import { Candidature } from './pages/Candidature';
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -80,6 +84,46 @@ function App() {
               element={
                 <PageTransition>
                   <Contact />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/actualites"
+              element={
+                <PageTransition>
+                  <Actualites />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/actualites/:slug"
+              element={
+                <PageTransition>
+                  <ActualiteDetail />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/recrutement"
+              element={
+                <PageTransition>
+                  <Recrutement />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/recrutement/:slug/postuler"
+              element={
+                <PageTransition>
+                  <Candidature />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/recrutement/:slug"
+              element={
+                <PageTransition>
+                  <RecrutementDetail />
                 </PageTransition>
               }
             />
