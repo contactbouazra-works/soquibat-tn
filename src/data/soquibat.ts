@@ -55,26 +55,42 @@ const productPhotoFiles = import.meta.glob<string>(
   { eager: true, import: 'default' },
 );
 
-const getProductPhotos = (folder: string, productName: string) =>
-  Object.entries(productPhotoFiles)
+const getProductPhotos = (
+  folder: string,
+  productName: string,
+  options?: { featuredImage?: string; excludedImages?: string[] },
+) => {
+  const photoEntries = Object.entries(productPhotoFiles)
     .filter(([path]) => path.startsWith(`../assets/img/${folder}/`))
     .sort(([firstPath], [secondPath]) => firstPath.localeCompare(secondPath, undefined, { numeric: true }))
-    .map(([, image], index) => ({
-      name: `${productName} ${String(index + 1).padStart(2, '0')}`,
-      image,
-    }));
+    .filter(([path]) => !options?.excludedImages?.includes(path.split('/').pop() ?? ''));
+  const featuredEntries = options?.featuredImage
+    ? photoEntries.filter(([path]) => path.endsWith(`/${options.featuredImage}`))
+    : [];
+  const orderedEntries = [
+    ...featuredEntries,
+    ...photoEntries.filter(([path]) => !path.endsWith(`/${options?.featuredImage}`)),
+  ];
+
+  return orderedEntries.map(([, image], index) => ({
+    name: `${productName} ${String(index + 1).padStart(2, '0')}`,
+    image,
+  }));
+};
 
 const productPhotos = {
   poutrelles: getProductPhotos('poutrelles', 'Poutrelle'),
   toles: getProductPhotos('toles', 'Tôle'),
   tubes: getProductPhotos('tubes', 'Tube'),
-  aluminium: getProductPhotos('aluminium', 'Tôle aluminium'),
+  aluminium: getProductPhotos('aluminium', 'Tôle aluminium', { featuredImage: 'IMG_3519.jpg' }),
   inox: getProductPhotos('inox', 'Inox'),
   lamesRideaux: getProductPhotos('lames-rideaux', 'Lame de rideau'),
   pannes: getProductPhotos('panne-c', 'Panne'),
   fersMarchands: getProductPhotos('fers-merchands', 'Fer marchand'),
   accessoires: getProductPhotos('accessoires', 'Accessoire'),
-  aciersSpeciaux: getProductPhotos('aciers-speciaux', 'Acier spécial'),
+  aciersSpeciaux: getProductPhotos('aciers-speciaux', 'Acier spécial', {
+    excludedImages: ['IMG_0052.jpg'],
+  }),
 };
 
 export const products = [
@@ -214,7 +230,7 @@ const localProductShowcaseImages: Record<string, string | undefined> = {
   Aluminium: productPhotos.aluminium[0]?.image,
   Inox: productPhotos.inox[0]?.image,
   'Lames-rideaux-et-accessoires-portes': productPhotos.lamesRideaux[0]?.image,
-  'Pannes-C-et-Z': productPhotos.pannes[0]?.image,
+  'Pannes-C-et-Z': productPhotos.pannes[1]?.image ?? productPhotos.pannes[0]?.image,
   'Fer-marchands': productPhotos.fersMarchands[0]?.image,
   'Accessoires-Charpente': productPhotos.accessoires[0]?.image,
   'Aciers-Spéciaux': productPhotos.aciersSpeciaux[0]?.image,
