@@ -3,8 +3,6 @@ import type { SearchResult } from '../lib/siteSearch';
 
 const categoryLabels: Record<SearchResult['category'], string> = {
   Produits: '#Produits',
-  Actualités: '#Actualités',
-  Recrutement: '#Recrutement',
   Groupe: '#Groupe',
 };
 

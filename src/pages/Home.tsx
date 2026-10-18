@@ -4,8 +4,6 @@ import { SectionSlideFlow } from '../components/SectionSlideFlow';
 import { CompanyStorySection } from '../components/CompanyStorySection';
 import { SubsidiariesSection } from '../components/SubsidiariesSection';
 import { InternationalSection } from '../components/InternationalSection';
-import { CareersSection } from '../components/CareersSection';
-import { NewsSection } from '../components/NewsSection';
 import { Seo } from '../components/Seo';
 
 export function Home() {
@@ -23,8 +21,6 @@ export function Home() {
         <SubsidiariesSection />
         <InternationalSection />
       </SectionSlideFlow>
-      <CareersSection />
-      <NewsSection />
     </>
   );
 }

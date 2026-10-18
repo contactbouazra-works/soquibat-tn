@@ -8,11 +8,6 @@ import { Home } from './pages/Home';
 import { Products } from './pages/Products';
 import { ProductDetail } from './pages/ProductDetail';
 import { Contact } from './pages/Contact';
-import { ThemeProvider } from './context/ThemeProvider';
-import { Actualites } from './pages/Actualites';
-import { ActualiteDetail } from './pages/ActualiteDetail';
-import { Recrutement, RecrutementDetail } from './pages/Recrutement';
-import { Candidature } from './pages/Candidature';
 import { Groupe } from './pages/Groupe';
 import { SearchResults } from './pages/SearchResults';
 
@@ -78,11 +73,10 @@ function App() {
   const location = useLocation();
 
   return (
-    <ThemeProvider>
-      <>
-        <ScrollToTop />
-        <Header />
-        <AnimatePresence mode="wait">
+    <>
+      <ScrollToTop />
+      <Header />
+      <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route
               path="/"
@@ -132,51 +126,10 @@ function App() {
                 </PageTransition>
               }
             />
-            <Route
-              path="/actualites"
-              element={
-                <PageTransition>
-                  <Actualites />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/actualites/:slug"
-              element={
-                <PageTransition>
-                  <ActualiteDetail />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/recrutement"
-              element={
-                <PageTransition>
-                  <Recrutement />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/recrutement/:slug/postuler"
-              element={
-                <PageTransition>
-                  <Candidature />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/recrutement/:slug"
-              element={
-                <PageTransition>
-                  <RecrutementDetail />
-                </PageTransition>
-              }
-            />
           </Routes>
-        </AnimatePresence>
-        <Footer />
-      </>
-    </ThemeProvider>
+      </AnimatePresence>
+      <Footer />
+    </>
   );
 }
 

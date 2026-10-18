@@ -4,7 +4,7 @@ import { SearchResultCard } from '../components/SearchResultCard';
 import { Seo } from '../components/Seo';
 import { searchSiteContent, type SearchCategory } from '../lib/siteSearch';
 
-const categories = ['Tous', 'Produits', 'Actualités', 'Recrutement', 'Groupe'] as const;
+const categories = ['Tous', 'Produits', 'Groupe'] as const;
 type CategoryFilter = (typeof categories)[number];
 
 export function SearchResults() {
@@ -28,7 +28,7 @@ export function SearchResults() {
     <>
       <Seo
         title={query ? `Recherche « ${query} » | SOQUIBAT Group` : 'Recherche | SOQUIBAT Group'}
-        description="Recherchez dans le catalogue produits, les actualités, les pages du groupe et les publications de recrutement de SOQUIBAT."
+        description="Recherchez dans le catalogue produits et les pages du groupe SOQUIBAT."
         path="/search"
         noindex
       />
@@ -39,7 +39,7 @@ export function SearchResults() {
             {query ? <>Résultats de recherche pour « {query} »</> : 'Que recherchez-vous ?'}
           </h1>
           <p className="mt-3 text-sm text-paper/60">
-            {query ? `${allResults.length} résultat${allResults.length === 1 ? '' : 's'}` : 'Produits, actualités, groupe et recrutement.'}
+            {query ? `${allResults.length} résultat${allResults.length === 1 ? '' : 's'}` : 'Produits et groupe.'}
           </p>
 
           <form onSubmit={submitSearch} className="mt-8 flex flex-col gap-3 sm:flex-row">

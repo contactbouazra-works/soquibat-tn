@@ -8,7 +8,12 @@ export function InternationalSection() {
   return (
     <SectionTransition id="points-de-vente" className="bg-ink px-6 py-24 lg:px-12 lg:py-32">
       <div className="mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-2 lg:gap-20">
-        <ParallaxImage src={international.image} alt="Site industriel Soquibat" className="aspect-4/3 w-full" />
+        <ParallaxImage
+          src={international.image}
+          alt="Carte de la Tunisie et de ses implantations"
+          className="aspect-square w-full"
+          imgClassName="!top-0 !h-full !object-contain"
+        />
 
         <div className="flex flex-col justify-center">
           <Reveal className="font-display text-sm uppercase tracking-[0.2em] text-orange">

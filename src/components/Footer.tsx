@@ -8,8 +8,6 @@ import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 const companyLinks = [
   { label: 'Notre histoire', href: '/groupe' },
   { label: 'Filiales', href: '/#filiales' },
-  { label: 'Actualités', href: '/actualites' },
-  { label: 'Carrière', href: '/recrutement' },
 ];
 
 const supportLinks = [
@@ -135,9 +133,12 @@ export function Footer() {
               <div>
                 <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-slate-100">Horaires</h2>
                 <p className="mt-2 text-sm leading-relaxed text-slate-400">
-                  Lun - Ven: 07h30 - 17h00
-                  <br />
-                  Sam: 07h30 - 13h00
+                  {contact.hours.map((hours, index) => (
+                    <span key={hours.label}>
+                      {hours.label}: {hours.value}
+                      {index < contact.hours.length - 1 && <br />}
+                    </span>
+                  ))}
                 </p>
               </div>
             </div>

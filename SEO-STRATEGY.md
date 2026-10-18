@@ -24,8 +24,8 @@ No strategy can guarantee a #1 Google position. Search volumes, current rankings
 | P1 | Product detail copy is broad and usually does not state dimensions, grades, standards, availability, delivery, or technical-document links. | Checked product data in `src/data/soquibat.ts` and detail template. | Work with product owners to add verifiable specifications and inquiry paths; do not invent standards or stock claims. |
 | P1 | Product reference imagery is configured with a remote `/public/public/produits/` URL prefix, which should be checked for successful responses, crawlability, and image stability. | `referenceImage()` in `src/data/soquibat.ts`. | Crawl every referenced image URL, repair failures, and migrate to stable first-party optimized assets where appropriate. |
 | P1 | The contact route currently contains a heading and short introduction, but no visible form, phone, address, map, or branch selector in the checked page component. | `src/pages/Contact.tsx`; contact facts exist separately in `src/data/soquibat.ts`. | Provide a usable quote/contact path with verified business details and a clear response expectation. Track submitted leads. |
-| P2 | The checked data contains 13 product categories, but only one Tunisia street address and three phone numbers; it does not substantiate 15+ Tunisian branch records or coordinates. | `products` and `contact` in `src/data/soquibat.ts`. | Verify the real branch inventory with operations before publishing location pages, local schema, or Google Business Profiles. |
-| P2 | The checked product images include large raster assets; run a full asset-weight and mobile-performance audit before deciding which assets to replace. | `src/assets/img/`, including large news and product files. | Convert/compress and serve responsive images, prioritizing above-the-fold images and slow mobile connections. |
+| P2 | The supplied company information lists 13 comptoirs and one headquarters address; this does not substantiate 13 distinct Tunisian branch records or coordinates. | `contact` and `stats` in `src/data/soquibat.ts`. | Verify the branch inventory with operations before publishing location pages, local schema, or Google Business Profiles. |
+| P2 | The checked product images include large raster assets; run a full asset-weight and mobile-performance audit before deciding which assets to replace. | `src/assets/img/`, including large product files. | Convert/compress and serve responsive images, prioritizing above-the-fold images and slow mobile connections. |
 
 ### Existing `.tn` domain is a separate deployment
 
@@ -159,11 +159,11 @@ Measure actual mobile and desktop users at the 75th percentile, by template and 
 
 ### Ground-truth branch register
 
-Before optimizing “15+ comptoirs,” operations must deliver one authoritative record per customer-facing branch:
+Before creating local search pages for the 13 comptoirs, operations must deliver one authoritative record per customer-facing branch:
 
 `branch_id, public_name, legal_entity, full_address, governorate, city, postal_code, latitude, longitude, local_phone, opening_hours, landing_page, primary_category, services/products, photos, opening_status, GBP_URL, source_of_truth, last_verified`.
 
-The checked repository only provides the Ariana head-office address. It does not support 15+ Tunisia location records. Do not publish locations or profiles until each is confirmed as a real staffed location serving customers.
+The repository now lists the SOQUIBAT Group headquarters at Immeuble Mezghani, Rue Lac Wendermer, Les berges du Lac Tunis. This single headquarters address does not support 13 separate Tunisia location records. Do not publish locations or profiles until each is confirmed as a real staffed location serving customers.
 
 ### Google Business Profile checklist
 

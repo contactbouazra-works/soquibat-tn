@@ -2,19 +2,19 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
-@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+@custom-variant dark (&:where(:root, :root *));
 
 :root {
   color-scheme: dark;
   --hero-copy-color: #ffffff;
   --hero-muted-copy-color: #e2e8f0;
-  --hero-nav-stroke: rgba(255, 255, 255, 0.72);
-  --hero-copy-shadow: none;
-  --hero-overlay-left: linear-gradient(to right, rgba(12, 13, 15, 0.92) 0%, rgba(12, 13, 15, 0.72) 40%, rgba(12, 13, 15, 0.38) 68%, rgba(12, 13, 15, 0.08) 100%);
-  --hero-overlay-right: linear-gradient(to left, rgba(12, 13, 15, 0.92) 0%, rgba(12, 13, 15, 0.72) 40%, rgba(12, 13, 15, 0.38) 68%, rgba(12, 13, 15, 0.08) 100%);
-  --hero-vignette: linear-gradient(to top, rgba(12, 13, 15, 0.34), transparent 42%, rgba(12, 13, 15, 0.12));
-  --hero-expansion-scrim: rgba(2, 6, 23, 0.3);
-  --hero-copy-scrim: rgba(2, 6, 23, 0.46);
+  --hero-overlay-left: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 45%, transparent 100%);
+}
+
+:root[data-theme='light'] {
+  --hero-copy-color: #0f172a;
+  --hero-muted-copy-color: #334155;
+  --hero-overlay-left: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 45%, transparent 100%);
 }
 
 @theme {
@@ -28,27 +28,6 @@
   --color-orange-dark: #c6530a;
   --color-steel: #8a9099;
   --color-line: rgba(255, 255, 255, 0.14);
-}
-
-:root[data-theme='light'] {
-  color-scheme: light;
-  --color-ink: #f8fafc;
-  --color-ink-soft: #ffffff;
-  --color-paper: #0f172a;
-  --color-line: rgba(15, 23, 42, 0.14);
-  --hero-copy-color: #0f172a;
-  --hero-muted-copy-color: #334155;
-  --hero-nav-stroke: rgba(15, 23, 42, 0.72);
-  --hero-copy-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
-  --hero-overlay-left: linear-gradient(to right, rgba(248, 250, 252, 0.58) 0%, rgba(248, 250, 252, 0.38) 30%, rgba(248, 250, 252, 0.14) 58%, transparent 82%);
-  --hero-overlay-right: linear-gradient(to left, rgba(248, 250, 252, 0.58) 0%, rgba(248, 250, 252, 0.38) 30%, rgba(248, 250, 252, 0.14) 58%, transparent 82%);
-  --hero-vignette: linear-gradient(to top, rgba(255, 255, 255, 0.04), transparent 42%, rgba(255, 255, 255, 0.03));
-  --hero-expansion-scrim: rgba(255, 255, 255, 0.08);
-  --hero-copy-scrim: rgba(255, 255, 255, 0.24);
-}
-
-:root[data-theme='dark'] {
-  color-scheme: dark;
 }
 
 * {
@@ -82,7 +61,7 @@ html {
   scroll-behavior: smooth;
 }
 
-:where(#produits, #histoire, #filiales, #points-de-vente, #actualites, #recrutement) {
+:where(#produits, #histoire, #filiales, #points-de-vente) {
   scroll-margin-top: 4.5rem;
 }
 
@@ -117,14 +96,6 @@ body {
   display: none;
 }
 
-.theme-transition,
-.theme-transition *,
-.theme-transition *::before,
-.theme-transition *::after {
-  transition-property: color, background-color, border-color, outline-color, fill, stroke, text-decoration-color;
-  transition-duration: 300ms;
-}
-
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   text-transform: uppercase;
@@ -146,54 +117,21 @@ a {
   background-size: 18px 18px;
 }
 
-:root[data-theme='light'] .dot-grid {
-  background-image: radial-gradient(rgba(15, 23, 42, 0.13) 1px, transparent 1px);
-}
-
-:root[data-theme='light'] .outline-text {
-  -webkit-text-stroke-color: rgba(15, 23, 42, 0.55);
-}
-
-.hero-image-copy--intro,
-.hero-image-copy--product {
-  color: var(--hero-copy-color);
-  text-shadow: var(--hero-copy-shadow);
-}
-
-.hero-image-copy--intro h1,
-.hero-image-copy--intro h2,
-.hero-image-copy--product h1,
-.hero-image-copy--product h2,
-.hero-image-copy--intro [class~="text-paper"],
-.hero-image-copy--product [class~="text-paper"] {
+.hero-copy {
   color: var(--hero-copy-color);
 }
 
-.hero-image-copy--intro [class~="text-paper/75"],
-.hero-image-copy--intro [class~="text-paper/80"],
-.hero-image-copy--product [class~="text-paper/75"],
-.hero-image-copy--product [class~="text-paper/80"] {
+.hero-copy h1,
+.hero-copy h2 {
+  color: var(--hero-copy-color);
+}
+
+.hero-copy-muted {
   color: var(--hero-muted-copy-color);
 }
 
 .hero-image-overlay--left {
   background-image: var(--hero-overlay-left);
-}
-
-.hero-image-overlay--right {
-  background-image: var(--hero-overlay-right);
-}
-
-.hero-image-vignette {
-  background-image: var(--hero-vignette);
-}
-
-.hero-image-expansion-scrim {
-  background-color: var(--hero-expansion-scrim);
-}
-
-.hero-image-copy-scrim {
-  background-color: var(--hero-copy-scrim);
 }
 
 .outline-text {

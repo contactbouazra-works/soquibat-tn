@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { products } from '../data/soquibat';
+import { getProductShowcaseImage, products } from '../data/soquibat';
 import { motion } from 'framer-motion';
 import { Reveal } from '../components/Reveal';
 import { Seo } from '../components/Seo';
@@ -34,7 +34,7 @@ export function Products() {
                   className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
                 >
                   <motion.img
-                    src={product.image}
+                    src={getProductShowcaseImage(product)}
                     alt=""
                     loading="lazy"
                     className="h-full w-full rounded-2xl object-cover"

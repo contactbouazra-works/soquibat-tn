@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState, type PointerEvent } from 'react';
+import { useRef, useState, type PointerEvent } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { products } from '../data/soquibat';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
@@ -10,6 +10,10 @@ export function ProductDetail() {
   const product = products.find((item) => item.slug === slug);
   const reduceMotion = usePrefersReducedMotion();
   const [activeReferenceIndex, setActiveReferenceIndex] = useState(0);
+  const [imageZoom, setImageZoom] = useState(1);
+  const [imagePan, setImagePan] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragState = useRef<{ pointerId: number; x: number; y: number; panX: number; panY: number } | null>(null);
   const [zoomLens, setZoomLens] = useState<{
     x: number;
     y: number;
@@ -44,11 +48,74 @@ export function ProductDetail() {
   const hasMultipleReferences = product.references.length > 1;
   const showPreviousReference = () => {
     setActiveReferenceIndex((index) => (index - 1 + product.references.length) % product.references.length);
+    setImageZoom(1);
+    setImagePan({ x: 0, y: 0 });
+    setZoomLens(null);
   };
   const showNextReference = () => {
     setActiveReferenceIndex((index) => (index + 1) % product.references.length);
+    setImageZoom(1);
+    setImagePan({ x: 0, y: 0 });
+    setZoomLens(null);
+  };
+  const showReference = (index: number) => {
+    setActiveReferenceIndex(index);
+    setImageZoom(1);
+    setImagePan({ x: 0, y: 0 });
+    setZoomLens(null);
+  };
+  const changeZoom = (direction: -1 | 1) => {
+    const nextZoom = Math.min(4, Math.max(1, imageZoom + direction * 0.5));
+    setImageZoom(nextZoom);
+    if (nextZoom === 1) setImagePan({ x: 0, y: 0 });
+    else if (imageZoom > 1) {
+      const zoomRatio = nextZoom / imageZoom;
+      setImagePan((pan) => ({ x: pan.x * zoomRatio, y: pan.y * zoomRatio }));
+    }
+  };
+  const startImageDrag = (event: PointerEvent<HTMLDivElement>) => {
+    if (imageZoom === 1 || event.pointerType !== 'mouse' || !(event.target instanceof HTMLImageElement)) return;
+    event.preventDefault();
+    dragState.current = {
+      pointerId: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      panX: imagePan.x,
+      panY: imagePan.y,
+    };
+    setIsDragging(true);
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+  const dragImage = (event: PointerEvent<HTMLDivElement>) => {
+    const drag = dragState.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+
+    const imageElement = event.currentTarget.querySelector('img');
+    if (!imageElement?.naturalWidth || !imageElement.naturalHeight) return;
+    const stage = event.currentTarget;
+    const maxX = Math.max(0, (imageElement.clientWidth * imageZoom - stage.clientWidth) / 2);
+    const maxY = Math.max(0, (imageElement.clientHeight * imageZoom - stage.clientHeight) / 2);
+    const x = drag.panX + event.clientX - drag.x;
+    const y = drag.panY + event.clientY - drag.y;
+
+    setImagePan({
+      x: Math.min(maxX, Math.max(-maxX, x)),
+      y: Math.min(maxY, Math.max(-maxY, y)),
+    });
+  };
+  const stopImageDrag = (event: PointerEvent<HTMLDivElement>) => {
+    if (dragState.current?.pointerId !== event.pointerId) return;
+    dragState.current = null;
+    setIsDragging(false);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
   };
   const updateZoomLens = (event: PointerEvent<HTMLDivElement>) => {
+    if (imageZoom > 1) {
+      setZoomLens(null);
+      return;
+    }
     if (event.pointerType !== 'mouse') {
       setZoomLens(null);
       return;
@@ -56,6 +123,10 @@ export function ProductDetail() {
 
     const imageElement = event.currentTarget.querySelector('img');
     if (!imageElement?.naturalWidth || !imageElement.naturalHeight) return;
+    if (event.target !== imageElement) {
+      setZoomLens(null);
+      return;
+    }
 
     const stageRect = event.currentTarget.getBoundingClientRect();
     const imageRect = imageElement.getBoundingClientRect();
@@ -75,16 +146,14 @@ export function ProductDetail() {
     }
 
     const lensSize = Math.min(120, imageWidth, imageHeight);
-    const lensLeft = Math.min(imageWidth - lensSize, Math.max(0, pointerX - lensSize / 2));
-    const lensTop = Math.min(imageHeight - lensSize, Math.max(0, pointerY - lensSize / 2));
     const zoom = 2.5;
 
     setZoomLens({
-      x: imageLeft + lensLeft,
-      y: imageTop + lensTop,
+      x: imageLeft + pointerX - lensSize / 2,
+      y: imageTop + pointerY - lensSize / 2,
       size: lensSize,
       backgroundSize: `${imageWidth * zoom}px ${imageHeight * zoom}px`,
-      backgroundPosition: `-${lensLeft * zoom}px -${lensTop * zoom}px`,
+      backgroundPosition: `${lensSize / 2 - pointerX * zoom}px ${lensSize / 2 - pointerY * zoom}px`,
     });
   };
 
@@ -110,21 +179,62 @@ export function ProductDetail() {
             <motion.div
               onPointerMove={updateZoomLens}
               onPointerLeave={() => setZoomLens(null)}
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+              onPointerDown={startImageDrag}
+              onPointerMoveCapture={dragImage}
+              onPointerUp={stopImageDrag}
+              onPointerCancel={stopImageDrag}
+              initial={reduceMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: reduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="relative flex aspect-[4/3] min-h-64 items-center justify-center overflow-hidden rounded-2xl border border-line bg-slate-100 dark:bg-slate-950"
+              className="relative flex aspect-[4/3] min-h-64 items-center justify-center overflow-hidden rounded-2xl border border-line bg-slate-100 dark:bg-black"
             >
               <motion.img
                 key={image}
                 src={image}
                 alt={activeReference?.name ?? product.name}
-                initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={reduceMotion ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: reduceMotion ? 0 : 0.3 }}
-                className="absolute inset-5 h-[calc(100%-2.5rem)] w-[calc(100%-2.5rem)] select-none object-contain sm:inset-10 sm:h-[calc(100%-5rem)] sm:w-[calc(100%-5rem)]"
+                className={`absolute inset-5 h-[calc(100%-2.5rem)] w-[calc(100%-2.5rem)] select-none object-contain sm:inset-10 sm:h-[calc(100%-5rem)] sm:w-[calc(100%-5rem)] ${
+                  imageZoom > 1 ? (isDragging ? 'cursor-grabbing' : 'cursor-grab') : 'cursor-default'
+                }`}
+                style={{
+                  scale: imageZoom,
+                  x: imagePan.x,
+                  y: imagePan.y,
+                  transformOrigin: 'center',
+                  touchAction: 'none',
+                }}
                 draggable={false}
               />
+              <div className="absolute right-4 top-4 z-20 flex flex-col gap-2">
+                <button
+                  type="button"
+                  onClick={() => changeZoom(1)}
+                  disabled={imageZoom >= 4}
+                  aria-label="Zoom avant"
+                  title="Zoom avant"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/75 text-white backdrop-blur transition hover:border-orange hover:text-orange disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
+                >
+                  <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <circle cx="10.8" cy="10.8" r="6.8" />
+                    <path d="m16 16 4.5 4.5M10.8 7.8v6M7.8 10.8h6" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => changeZoom(-1)}
+                  disabled={imageZoom <= 1}
+                  aria-label="Zoom arrière"
+                  title="Zoom arrière"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/75 text-white backdrop-blur transition hover:border-orange hover:text-orange disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
+                >
+                  <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <circle cx="10.8" cy="10.8" r="6.8" />
+                    <path d="m16 16 4.5 4.5M7.8 10.8h6" />
+                  </svg>
+                </button>
+              </div>
               {zoomLens && (
                 <span
                   aria-hidden="true"
@@ -187,10 +297,10 @@ export function ProductDetail() {
                     <button
                       key={`${reference.name}-${reference.image}`}
                       type="button"
-                      onClick={() => setActiveReferenceIndex(index)}
+                      onClick={() => showReference(index)}
                       aria-label={`Afficher ${reference.name}`}
                       aria-pressed={activeReferenceIndex === index}
-                      className={`group w-28 shrink-0 snap-start overflow-hidden rounded-lg border bg-white text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange dark:bg-slate-950 sm:w-32 ${
+                      className={`group w-28 shrink-0 snap-start overflow-hidden rounded-lg border bg-white text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange dark:bg-black sm:w-32 ${
                         activeReferenceIndex === index ? 'border-orange' : 'border-line hover:border-slate-400 dark:hover:border-white/40'
                       }`}
                     >

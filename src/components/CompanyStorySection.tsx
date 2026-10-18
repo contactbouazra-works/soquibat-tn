@@ -1,5 +1,5 @@
 import { motion, useTransform } from 'framer-motion';
-import heroImage from '../assets/img/hero-1.jpg';
+import teamBuildingImage from '../assets/img/team-building.webp';
 import { company, stats } from '../data/soquibat';
 import { Reveal, RevealLines } from './Reveal';
 import { CTAButton } from './CTAButton';
@@ -26,8 +26,8 @@ export function CompanyStorySection() {
         <div className="relative lg:sticky lg:top-32 lg:h-[70vh] lg:self-start">
           <div className="relative aspect-4/3 w-full overflow-hidden lg:aspect-auto lg:h-full">
             <motion.img
-              src={heroImage}
-              alt="Site industriel Soquibat"
+              src={teamBuildingImage}
+              alt="Équipe SOQUIBAT Group réunie lors d’un team building"
               className="absolute inset-x-0 -top-[10%] h-[120%] w-full object-cover"
               style={{ scale: imageScale, y: imageY }}
             />

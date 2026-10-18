@@ -150,7 +150,7 @@ export function GlobalSearch() {
                     value={query}
                     onChange={(event) => setQuery(event.target.value)}
                     onKeyDown={handleInputKeyDown}
-                    placeholder="Rechercher produits, actualités, offres…"
+                    placeholder="Rechercher des produits, des pages du groupe…"
                     autoComplete="off"
                     className="h-10 min-w-0 flex-1 bg-transparent text-base text-slate-900 outline-none placeholder:text-slate-400 dark:text-white dark:placeholder:text-slate-500 sm:text-lg"
                   />
@@ -179,7 +179,7 @@ export function GlobalSearch() {
                   </button>
                 </label>
                 <p className="mt-2 pl-8 text-[0.68rem] text-slate-500 dark:text-slate-400">
-                  Recherchez dans les produits, actualités, pages du groupe et recrutements.
+                  Recherchez dans les produits et les pages du groupe.
                 </p>
               </div>
 
@@ -212,7 +212,7 @@ export function GlobalSearch() {
                 <button
                   type="button"
                   onClick={goToAllResults}
-                  className="flex w-full items-center justify-between gap-4 border-t border-slate-200 bg-slate-50 px-5 py-4 text-left text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-indigo-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-800 dark:focus-visible:outline-amber-400"
+                  className="flex w-full items-center justify-between gap-4 border-t border-slate-200 bg-slate-50 px-5 py-4 text-left text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-indigo-500 dark:border-slate-800 dark:bg-black dark:text-slate-100 dark:hover:bg-slate-800 dark:focus-visible:outline-amber-400"
                 >
                   <span>Voir tous les {results.length} résultats pour « {query.trim()} »</span>
                   <span aria-hidden="true">→</span>

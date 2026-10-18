@@ -1,7 +1,7 @@
 import heroImage from '../assets/img/hero-1.jpg';
-import { careers, company, international, news, products, subsidiaries } from '../data/soquibat';
+import { company, international, products, subsidiaries } from '../data/soquibat';
 
-export type SearchCategory = 'Produits' | 'Actualités' | 'Recrutement' | 'Groupe';
+export type SearchCategory = 'Produits' | 'Groupe';
 
 export type SearchResult = {
   id: string;
@@ -30,26 +30,6 @@ const searchIndex: SearchResult[] = [
       searchText: `${product.name} ${product.slug} ${product.description} ${references}`,
     };
   }),
-  ...news.map((article) => ({
-    id: `news-${article.slug}`,
-    category: 'Actualités' as const,
-    title: article.detailTitle,
-    metadata: `${article.tag} · ${article.date}`,
-    description: article.content.join(' '),
-    image: article.image,
-    href: `/actualites/${encodeURIComponent(article.detailTitle)}`,
-    searchText: `${article.detailTitle} ${article.title} ${article.tag} ${article.categories.join(' ')} ${article.excerpt} ${article.content.join(' ')}`,
-  })),
-  ...careers.map((job) => ({
-    id: `career-${job.slug}`,
-    category: 'Recrutement' as const,
-    title: job.roleTitle,
-    metadata: `${job.department} · ${job.location} · ${job.status === 'archive' ? 'Annonce archivée' : 'Détails à confirmer'}`,
-    description: `${job.excerpt} ${job.responsibilities.join(' ')} ${job.profile.join(' ')}`,
-    image: job.image,
-    href: `/recrutement/${encodeURIComponent(job.slug)}`,
-    searchText: `${job.title} ${job.roleTitle} ${job.department} ${job.location} ${job.contractType} ${job.excerpt} ${job.responsibilities.join(' ')} ${job.profile.join(' ')} ${job.skills.join(' ')}`,
-  })),
   {
     id: 'group-soquibat',
     category: 'Groupe' as const,
