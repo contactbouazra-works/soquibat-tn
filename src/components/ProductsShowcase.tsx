@@ -23,33 +23,74 @@ function ProductsHeading({ reduceMotion }: { reduceMotion: boolean }) {
 function ProductLink({
   index,
   active,
+  expanded,
   onHover,
+  onToggle,
 }: {
   index: number;
   active: boolean;
+  expanded: boolean;
   onHover?: (index: number) => void;
+  onToggle: (index: number) => void;
 }) {
   const product = products[index];
+  const detailsId = `product-details-${index}`;
 
   return (
-    <li className="border-b border-line">
-      <Link
-        to={`/produits/${encodeURIComponent(product.slug)}`}
-        onMouseEnter={() => onHover?.(index)}
-        onFocus={() => onHover?.(index)}
-        className="group relative flex h-full items-center justify-between gap-4 py-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
-      >
-        <span
-          className={`min-w-0 font-display text-xl uppercase transition-colors duration-300 sm:text-2xl ${
-            active ? 'text-paper' : 'text-paper/35 group-hover:text-paper/70'
+    <li className="border-b border-line" onMouseEnter={() => onHover?.(index)}>
+      <div className="flex select-none items-center justify-between gap-4 py-5">
+        <button
+          type="button"
+          onClick={() => onToggle(index)}
+          onFocus={() => onHover?.(index)}
+          aria-expanded={expanded}
+          aria-controls={detailsId}
+          className={`button-no-swipe group min-w-0 select-none text-left cursor-pointer font-display text-xl uppercase transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange sm:text-2xl ${
+            active ? 'text-paper' : 'text-paper/35 hover:text-paper/70'
           }`}
         >
           {product.name}
-        </span>
-        <span className="shrink-0 font-display text-xl text-orange transition-transform duration-300 group-hover:translate-x-1">
-          +
-        </span>
-      </Link>
+        </button>
+        <button
+          type="button"
+          onClick={() => onToggle(index)}
+          aria-label={`${expanded ? 'Masquer' : 'Afficher'} les détails de ${product.name}`}
+          aria-expanded={expanded}
+          aria-controls={detailsId}
+          className="flex h-8 w-8 shrink-0 items-center justify-center cursor-pointer font-display text-xl text-orange transition-transform duration-300 hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
+        >
+          <motion.span
+            animate={{ rotate: expanded ? 180 : 0 }}
+            transition={{ duration: 0.1 }}
+            aria-hidden="true"
+          >
+            {expanded ? '-' : '+'}
+          </motion.span>
+        </button>
+      </div>
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            id={detailsId}
+            initial={{ height: 0, opacity: 0, y: -8 }}
+            animate={{ height: 'auto', opacity: 1, y: 0 }}
+            exit={{ height: 0, opacity: 0, y: -8 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="pb-5 pr-10 text-sm leading-relaxed text-paper/65">
+              <p>{product.description}</p>
+              <Link
+                to={`/produits/${encodeURIComponent(product.slug)}`}
+                className="button-swipe mt-4 inline-flex min-h-11 items-center gap-2 rounded-md bg-orange px-5 py-2.5 font-semibold text-slate-950 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
+              >
+                Découvrir le produit
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </li>
   );
 }
@@ -85,6 +126,7 @@ function ProductImage({ active, reduceMotion }: { active: number; reduceMotion: 
 
 export function ProductsShowcase() {
   const [active, setActive] = useState(0);
+  const [expanded, setExpanded] = useState<number | null>(null);
   const reduceMotion = usePrefersReducedMotion();
 
   return (
@@ -102,7 +144,14 @@ export function ProductsShowcase() {
         <div className="mt-10 grid items-start gap-8 lg:mt-14 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
           <ul className="flex flex-col divide-y divide-line lg:pb-28">
             {products.map((product, index) => (
-              <ProductLink key={product.slug} index={index} active={active === index} onHover={setActive} />
+              <ProductLink
+                key={product.slug}
+                index={index}
+                active={active === index}
+                expanded={expanded === index}
+                onHover={setActive}
+                onToggle={(productIndex) => setExpanded((current) => current === productIndex ? null : productIndex)}
+              />
             ))}
           </ul>
           <div className="sticky top-28 hidden self-start lg:block">

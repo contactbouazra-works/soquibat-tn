@@ -4,19 +4,6 @@
 
 import heroPartners from '../assets/img/hero-2.jpg';
 import mapTunis from '../assets/img/maptunis.webp';
-import productPoutrelles from '../assets/img/product-poutrelles.webp';
-import productToles from '../assets/img/product-toles.jpg';
-import productTubes from '../assets/img/product-tubes.jpg';
-import productPanneaux from '../assets/img/product-panneaux.jpg';
-import productLames from '../assets/img/product-lames.jpg';
-import productPannes from '../assets/img/product-pannes.png';
-import productFer from '../assets/img/product-fer.jpeg';
-import productAccessoires from '../assets/img/product-accessoires.png';
-import productInox from '../assets/img/product-inox.jpg';
-import productAluminium from '../assets/img/product-aluminium.jpeg';
-import productAciers from '../assets/img/product-aciers.jpeg';
-import productLaser from '../assets/img/product-laser.png';
-import productOssature from '../assets/img/product-ossature.png';
 
 import filiale1 from '../assets/img/filiale-1.png';
 import filiale2 from '../assets/img/filiale-2.png';
@@ -51,7 +38,7 @@ export const stats = [
 const referenceImage = (filename: string) => `https://soquibat.tn/public/public/produits/${filename}`;
 
 const productPhotoFiles = import.meta.glob<string>(
-  '../assets/img/{accessoires,aciers-speciaux,aluminium,fers-merchands,inox,lames-rideaux,panne-c,poutrelles,toles,tubes}/*.{jpg,jpeg,png,webp}',
+  '../assets/img/{accessoires,aciers-speciaux,aluminium,decoupe-laser,fers-merchands,inox,lames-rideaux,osature,panne-c,portes-frigorifiques,poutrelles,toles,tubes}/*.{jpg,jpeg,png,webp}',
   { eager: true, import: 'default' },
 );
 
@@ -88,16 +75,42 @@ const productPhotos = {
   pannes: getProductPhotos('panne-c', 'Panne'),
   fersMarchands: getProductPhotos('fers-merchands', 'Fer marchand'),
   accessoires: getProductPhotos('accessoires', 'Accessoire'),
+  decoupeLaser: getProductPhotos('decoupe-laser', 'Découpe laser'),
   aciersSpeciaux: getProductPhotos('aciers-speciaux', 'Acier spécial', {
     excludedImages: ['IMG_0052.jpg'],
   }),
+  ossature: getProductPhotos('osature', 'Ossature métallique'),
+  portesFrigorifiques: getProductPhotos('portes-frigorifiques', 'Porte frigorifique'),
 };
+
+const panneauxAndDoorsReferences = [
+  { name: 'Panneaux de bardage fixation cachée', image: referenceImage('20230329080748.png') },
+  { name: 'Panneaux de couverture', image: referenceImage('20230329080117.png') },
+  { name: 'Panneaux froid de bardage', image: referenceImage('20230329075840.png') },
+  ...productPhotos.portesFrigorifiques,
+];
+const inoxReferences = [
+  ...productPhotos.inox,
+  { name: 'Accessoires inox', image: referenceImage('20230328133945.png') },
+  { name: 'Cornière inox', image: referenceImage('20230328132709.png') },
+  { name: 'Fer plat inox', image: referenceImage('20230328133022.png') },
+  { name: 'Rond plein inox', image: referenceImage('20230328133307.png') },
+  { name: 'Tôle inox', image: referenceImage('20230328133556.png') },
+  { name: 'Tubes inox', image: referenceImage('20230328133826.png') },
+];
+const ossatureReferences = [
+  ...productPhotos.ossature,
+  { name: 'Montant', image: referenceImage('20240913094213.png') },
+  { name: 'Rail', image: referenceImage('20240913101923.png') },
+  { name: 'Fourrure', image: referenceImage('20240913102050.png') },
+  { name: 'Cornière', image: referenceImage('20240913102325.png') },
+];
 
 export const products = [
   {
     name: 'Poutrelles',
     slug: 'Poutrelles',
-    image: productPoutrelles,
+    image: productPhotos.poutrelles[0]?.image ?? heroPartners,
     referenceCount: productPhotos.poutrelles.length,
     description: 'Une gamme de poutrelles en acier au fer carbone, reconnues pour leur résistance mécanique et utilisées dans la construction métallique, le bâtiment et l’industrie.',
     references: productPhotos.poutrelles,
@@ -105,7 +118,7 @@ export const products = [
   {
     name: 'Tôles',
     slug: 'Tôles',
-    image: productToles,
+    image: productPhotos.toles[0]?.image ?? heroPartners,
     referenceCount: productPhotos.toles.length,
     description: 'Des tôles soumises à des contrôles continus de qualité, avec des solutions de découpe adaptées aux besoins et aux spécificités de chaque projet.',
     references: productPhotos.toles,
@@ -113,7 +126,7 @@ export const products = [
   {
     name: 'Tubes soudés en acier',
     slug: 'Tubes-soudés-en-acier',
-    image: productTubes,
+    image: productPhotos.tubes[0]?.image ?? heroPartners,
     referenceCount: productPhotos.tubes.length,
     description: 'Des tubes soudés par formage continu de feuillards laminés à chaud, à froid ou galvanisés, proposés dans plusieurs sections et nuances d’acier.',
     references: productPhotos.tubes,
@@ -121,23 +134,15 @@ export const products = [
   {
     name: 'Panneaux Sandwich & Portes Frigorifiques',
     slug: 'Panneaux-Sandwich-Portes-Frigorifiques',
-    image: productPanneaux,
-    referenceCount: 7,
+    image: referenceImage('20230329080748.png'),
+    referenceCount: panneauxAndDoorsReferences.length,
     description: 'Les panneaux sandwich TUNISCO et portes frigorifiques offrent des solutions légères et robustes pour les toitures, façades, cloisons isolées et chambres froides.',
-    references: [
-      { name: 'Panneaux de bardage fixation cachée', image: referenceImage('20230329080748.png') },
-      { name: 'Panneaux de couverture', image: referenceImage('20230329080117.png') },
-      { name: 'Panneaux froid de bardage', image: referenceImage('20230329075840.png') },
-      { name: 'Porte va-et-vient PVV', image: referenceImage('20240829095200.png') },
-      { name: 'Porte pivotante POP', image: referenceImage('20240829095318.png') },
-      { name: 'Porte de service PSR', image: referenceImage('20240829095431.png') },
-      { name: 'Porte coulissante POC', image: referenceImage('20240829095600.png') },
-    ],
+    references: panneauxAndDoorsReferences,
   },
   {
     name: 'Lames rideaux et accessoires portes',
     slug: 'Lames-rideaux-et-accessoires-portes',
-    image: productLames,
+    image: productPhotos.lamesRideaux[0]?.image ?? heroPartners,
     referenceCount: productPhotos.lamesRideaux.length,
     description: 'Une sélection de lames de rideaux et d’accessoires de portes : lames finales, perforées, planes ou bombées de type C, ainsi que les éléments de guidage.',
     references: productPhotos.lamesRideaux,
@@ -145,7 +150,7 @@ export const products = [
   {
     name: 'Pannes C et Z',
     slug: 'Pannes-C-et-Z',
-    image: productPannes,
+    image: productPhotos.pannes[0]?.image ?? heroPartners,
     referenceCount: productPhotos.pannes.length,
     description: 'Des profilés pannes C et Z proposés en différentes dimensions et épaisseurs pour répondre aux besoins des projets de construction.',
     references: productPhotos.pannes,
@@ -153,7 +158,7 @@ export const products = [
   {
     name: 'Fer marchand',
     slug: 'Fer-marchands',
-    image: productFer,
+    image: productPhotos.fersMarchands[0]?.image ?? heroPartners,
     referenceCount: productPhotos.fersMarchands.length,
     description: 'Une gamme de fers marchands laminés à chaud, appréciés pour leur soudabilité et leur aptitude à la mise en forme dans les domaines du bâtiment et de la forge.',
     references: productPhotos.fersMarchands,
@@ -161,7 +166,7 @@ export const products = [
   {
     name: 'Accessoires Charpente',
     slug: 'Accessoires-Charpente',
-    image: productAccessoires,
+    image: productPhotos.accessoires[0]?.image ?? heroPartners,
     referenceCount: productPhotos.accessoires.length,
     description: 'Des accessoires de charpente métallique pour compléter les structures et répondre aux besoins spécifiques des chantiers.',
     references: productPhotos.accessoires,
@@ -169,33 +174,23 @@ export const products = [
   {
     name: 'Inox',
     slug: 'Inox',
-    image: productInox,
-    referenceCount: productPhotos.inox.length || 6,
+    image: productPhotos.inox[0]?.image ?? heroPartners,
+    referenceCount: inoxReferences.length,
     description: 'Une gamme de produits inox comprenant des accessoires, profilés, tôles et tubes pour différents besoins de transformation et de construction.',
-    references: productPhotos.inox.length ? productPhotos.inox : [
-      { name: 'Accessoires inox', image: referenceImage('20230328133945.png') },
-      { name: 'Cornière inox', image: referenceImage('20230328132709.png') },
-      { name: 'Fer plat inox', image: referenceImage('20230328133022.png') },
-      { name: 'Rond plein inox', image: referenceImage('20230328133307.png') },
-      { name: 'Tôle inox', image: referenceImage('20230328133556.png') },
-      { name: 'Tubes inox', image: referenceImage('20230328133826.png') },
-    ],
+    references: inoxReferences,
   },
   {
     name: 'Aluminium',
     slug: 'Aluminium',
-    image: productAluminium,
-    referenceCount: productPhotos.aluminium.length || 2,
+    image: productPhotos.aluminium[0]?.image ?? heroPartners,
+    referenceCount: productPhotos.aluminium.length,
     description: 'Des tôles aluminium, proposées en version lisse ou striée, pour répondre aux besoins d’aménagement et de construction.',
-    references: productPhotos.aluminium.length ? productPhotos.aluminium : [
-      { name: 'Tôle aluminium', image: referenceImage('20230328134529.png') },
-      { name: 'Tôle striée aluminium', image: referenceImage('20260309083605.png') },
-    ],
+    references: productPhotos.aluminium,
   },
   {
     name: 'Aciers Spéciaux',
     slug: 'Aciers-Spéciaux',
-    image: productAciers,
+    image: productPhotos.aciersSpeciaux[0]?.image ?? heroPartners,
     referenceCount: productPhotos.aciersSpeciaux.length,
     description: 'Une sélection d’aciers spéciaux comprenant des ronds pleins aux caractéristiques distinctes, selon les exigences de chaque projet.',
     references: productPhotos.aciersSpeciaux,
@@ -203,23 +198,26 @@ export const products = [
   {
     name: 'Découpe Laser',
     slug: 'Découpe-Laser',
-    image: productLaser,
-    referenceCount: 0,
+    image: productPhotos.decoupeLaser[0]?.image ?? heroPartners,
+    referenceCount: productPhotos.decoupeLaser.length,
     description: 'Un service de découpe laser pour la réalisation de pièces métalliques adaptées aux besoins de votre projet.',
-    references: [],
+    references: productPhotos.decoupeLaser,
   },
   {
     name: 'Ossature métallique',
     slug: 'Ossature-métallique-pour-placoplâtre',
-    image: productOssature,
-    referenceCount: 4,
+    image: productPhotos.ossature[0]?.image ?? heroPartners,
+    referenceCount: ossatureReferences.length,
     description: 'Une gamme d’éléments d’ossature métallique conçus pour les plafonds et cloisons en plaques de plâtre.',
-    references: [
-      { name: 'Montant', image: referenceImage('20240913094213.png') },
-      { name: 'Rail', image: referenceImage('20240913101923.png') },
-      { name: 'Fourrure', image: referenceImage('20240913102050.png') },
-      { name: 'Cornière', image: referenceImage('20240913102325.png') },
-    ],
+    references: ossatureReferences,
+  },
+  {
+    name: 'Portes frigorifiques',
+    slug: 'Portes-frigorifiques',
+    image: productPhotos.portesFrigorifiques[0]?.image ?? heroPartners,
+    referenceCount: productPhotos.portesFrigorifiques.length,
+    description: 'Une gamme de portes frigorifiques adaptées aux chambres froides et aux espaces à température contrôlée.',
+    references: productPhotos.portesFrigorifiques,
   },
 ];
 
@@ -233,8 +231,10 @@ const localProductShowcaseImages: Record<string, string | undefined> = {
   'Pannes-C-et-Z': productPhotos.pannes[1]?.image ?? productPhotos.pannes[0]?.image,
   'Fer-marchands': productPhotos.fersMarchands[0]?.image,
   'Accessoires-Charpente': productPhotos.accessoires[0]?.image,
+  'Découpe-Laser': productPhotos.decoupeLaser[0]?.image,
   'Aciers-Spéciaux': productPhotos.aciersSpeciaux[0]?.image,
-  'Ossature-métallique-pour-placoplâtre': heroPartners,
+  'Ossature-métallique-pour-placoplâtre': productPhotos.ossature[0]?.image,
+  'Portes-frigorifiques': productPhotos.portesFrigorifiques[0]?.image,
 };
 
 export function getProductShowcaseImage(

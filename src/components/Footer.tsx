@@ -146,7 +146,7 @@ export function Footer() {
 
           <Link
             to="/contact"
-            className="inline-flex min-h-12 items-center justify-center rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-amber-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-500"
+            className="button-swipe inline-flex min-h-12 items-center justify-center rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-amber-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-500"
           >
             Contactez-nous
           </Link>
