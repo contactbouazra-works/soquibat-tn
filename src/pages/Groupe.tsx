@@ -5,6 +5,7 @@ import { Seo } from '../components/Seo';
 import { StatCounter } from '../components/StatCounter';
 import { company, products, stats } from '../data/soquibat';
 import groupImage from '../assets/img/team-building.webp';
+import { absoluteSeoUrl } from '../lib/seo';
 
 const groupPillars = [
   {
@@ -32,6 +33,27 @@ export function Groupe() {
         description="Fondé en 1983, SOQUIBAT Group est un acteur tunisien de la fabrication, de la commercialisation et de la transformation des produits métalliques."
         path="/groupe"
         image={groupImage}
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          name: 'Le Groupe SOQUIBAT',
+          description: company.description,
+          url: absoluteSeoUrl('/groupe'),
+          inLanguage: 'fr-TN',
+          about: {
+            '@type': 'Organization',
+            name: company.fullName,
+            url: absoluteSeoUrl('/'),
+            foundingDate: '1983',
+          },
+          breadcrumb: {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Accueil', item: absoluteSeoUrl('/') },
+              { '@type': 'ListItem', position: 2, name: 'Le Groupe', item: absoluteSeoUrl('/groupe') },
+            ],
+          },
+        }}
       />
       <main className="min-h-screen bg-ink text-paper">
         <section className="px-6 pb-20 pt-36 lg:px-12 lg:pb-28 lg:pt-44">

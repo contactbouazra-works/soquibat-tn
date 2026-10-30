@@ -3,14 +3,34 @@ import { getProductShowcaseImage, products } from '../data/soquibat';
 import { motion } from 'framer-motion';
 import { Reveal } from '../components/Reveal';
 import { Seo } from '../components/Seo';
+import { absoluteSeoUrl } from '../lib/seo';
 
 export function Products() {
+  const catalogSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Catalogue des produits métallurgiques SOQUIBAT',
+    description: 'Catalogue des produits en acier et solutions métallurgiques proposés par SOQUIBAT Group en Tunisie.',
+    url: absoluteSeoUrl('/produits'),
+    inLanguage: 'fr-TN',
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: products.map((product, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: product.name,
+        url: absoluteSeoUrl(`/produits/${encodeURIComponent(product.slug)}`),
+      })),
+    },
+  };
+
   return (
     <section className="bg-ink px-6 pb-24 pt-36 lg:px-12 lg:pt-44">
       <Seo
         title="Produits métallurgiques en Tunisie | SOQUIBAT Group"
         description="Consultez le catalogue SOQUIBAT : poutrelles, tôles, tubes acier, panneaux sandwich, inox, fer marchand et découpe laser. Demandez un devis adapté à votre projet."
         path="/produits"
+        structuredData={catalogSchema}
       />
       <div className="mx-auto max-w-[1400px]">
         <Reveal as="h1" className="font-display text-4xl uppercase text-paper lg:text-6xl">

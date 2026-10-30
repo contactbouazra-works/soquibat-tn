@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Seo } from '../components/Seo';
 import { contact } from '../data/soquibat';
+import { absoluteSeoUrl } from '../lib/seo';
 
 export function Contact() {
   const [mailNotice, setMailNotice] = useState('');
@@ -33,6 +34,33 @@ export function Contact() {
         title="Contactez SOQUIBAT Group | Formulaire de contact"
         description="Contactez SOQUIBAT Group pour vos questions, projets et demandes concernant les produits métallurgiques. Remplissez notre formulaire de contact."
         path="/contact"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'ContactPage',
+          name: 'Contacter SOQUIBAT Group',
+          description: 'Contactez SOQUIBAT Group pour vos questions, projets et demandes de devis concernant les produits métallurgiques.',
+          url: absoluteSeoUrl('/contact'),
+          inLanguage: 'fr-TN',
+          mainEntity: {
+            '@type': 'Organization',
+            name: 'SOQUIBAT Group',
+            url: absoluteSeoUrl('/'),
+            email: contact.email,
+            telephone: contact.phones[0],
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: contact.address,
+              addressLocality: 'Tunis',
+              addressCountry: 'TN',
+            },
+            contactPoint: contact.phones.map((telephone) => ({
+              '@type': 'ContactPoint',
+              telephone,
+              contactType: 'customer service',
+              availableLanguage: 'French',
+            })),
+          },
+        }}
       />
       <main className="min-h-screen bg-ink px-6 pb-24 pt-36 text-paper lg:px-12 lg:pt-44">
         <div className="mx-auto max-w-3xl">

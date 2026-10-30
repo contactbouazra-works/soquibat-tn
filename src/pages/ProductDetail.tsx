@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { products } from '../data/soquibat';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 import { Seo } from '../components/Seo';
+import { absoluteSeoUrl } from '../lib/seo';
 
 export function ProductDetail() {
   const { slug } = useParams();
@@ -46,6 +47,45 @@ export function ProductDetail() {
   const activeReference = product.references[activeReferenceIndex];
   const image = activeReference?.image ?? product.image;
   const hasMultipleReferences = product.references.length > 1;
+  const isService = product.slug === 'Découpe-Laser';
+  const productSchema = isService
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: product.name,
+        description: product.description,
+        image: absoluteSeoUrl(product.image),
+        url: absoluteSeoUrl(`/produits/${encodeURIComponent(product.slug)}`),
+        serviceType: 'Découpe laser de pièces métalliques',
+        areaServed: { '@type': 'Country', name: 'Tunisie' },
+        provider: { '@type': 'Organization', name: 'SOQUIBAT Group', url: absoluteSeoUrl('/') },
+      }
+    : {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: product.name,
+        description: product.description,
+        image: [product.image, ...product.references.slice(0, 4).map((reference) => reference.image)]
+          .map(absoluteSeoUrl),
+        category: product.name,
+        brand: { '@type': 'Brand', name: 'SOQUIBAT Group' },
+        manufacturer: { '@type': 'Organization', name: 'SOQUIBAT Group', url: absoluteSeoUrl('/') },
+        url: absoluteSeoUrl(`/produits/${encodeURIComponent(product.slug)}`),
+      };
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: absoluteSeoUrl('/') },
+      { '@type': 'ListItem', position: 2, name: 'Nos produits', item: absoluteSeoUrl('/produits') },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: product.name,
+        item: absoluteSeoUrl(`/produits/${encodeURIComponent(product.slug)}`),
+      },
+    ],
+  };
   const showPreviousReference = () => {
     setActiveReferenceIndex((index) => (index - 1 + product.references.length) % product.references.length);
     setImageZoom(1);
@@ -161,9 +201,10 @@ export function ProductDetail() {
     <section className="min-h-screen bg-ink px-6 pb-24 pt-32 text-paper lg:px-12 lg:pb-32 lg:pt-40" aria-labelledby="product-title">
       <Seo
         title={`${product.name} en Tunisie | SOQUIBAT Group`}
-        description={product.description}
+        description={product.seoDescription}
         path={`/produits/${encodeURIComponent(product.slug)}`}
         image={product.image}
+        structuredData={[productSchema, breadcrumbSchema]}
       />
       <div className="mx-auto max-w-[1400px]">
         <nav aria-label="Fil d’Ariane" className="mb-10 flex flex-wrap items-center gap-2 text-xs text-paper/50 sm:text-sm">

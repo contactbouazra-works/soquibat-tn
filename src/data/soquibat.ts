@@ -114,6 +114,7 @@ export const products = [
     image: productPhotos.poutrelles[0]?.image ?? heroPartners,
     referenceCount: productPhotos.poutrelles.length,
     description: 'Une gamme de poutrelles en acier au fer carbone, reconnues pour leur résistance mécanique et utilisées dans la construction métallique, le bâtiment et l’industrie.',
+    seoDescription: 'Poutrelles en acier pour la construction métallique et le bâtiment en Tunisie. Consultez les références SOQUIBAT et demandez un devis adapté à votre projet.',
     references: productPhotos.poutrelles,
   },
   {
@@ -122,6 +123,7 @@ export const products = [
     image: productPhotos.toles[0]?.image ?? heroPartners,
     referenceCount: productPhotos.toles.length,
     description: 'Des tôles soumises à des contrôles continus de qualité, avec des solutions de découpe adaptées aux besoins et aux spécificités de chaque projet.',
+    seoDescription: 'Tôles métalliques et solutions de découpe pour vos projets en Tunisie. Découvrez les références du catalogue SOQUIBAT et demandez un devis.',
     references: productPhotos.toles,
   },
   {
@@ -130,6 +132,7 @@ export const products = [
     image: productPhotos.tubes[0]?.image ?? heroPartners,
     referenceCount: productPhotos.tubes.length,
     description: 'Des tubes soudés par formage continu de feuillards laminés à chaud, à froid ou galvanisés, proposés dans plusieurs sections et nuances d’acier.',
+    seoDescription: 'Tubes soudés en acier, formés à partir de feuillards laminés à chaud, à froid ou galvanisés. Consultez les références SOQUIBAT en Tunisie.',
     references: productPhotos.tubes,
   },
   {
@@ -138,6 +141,7 @@ export const products = [
     image: referenceImage('20230329080748.png'),
     referenceCount: panneauxAndDoorsReferences.length,
     description: 'Les panneaux sandwich TUNISCO et portes frigorifiques offrent des solutions légères et robustes pour les toitures, façades, cloisons isolées et chambres froides.',
+    seoDescription: 'Panneaux sandwich TUNISCO pour toitures, façades et cloisons, avec portes frigorifiques pour chambres froides. Découvrez les références en Tunisie.',
     references: panneauxAndDoorsReferences,
   },
   {
@@ -146,6 +150,7 @@ export const products = [
     image: productPhotos.lamesRideaux[0]?.image ?? heroPartners,
     referenceCount: productPhotos.lamesRideaux.length,
     description: 'Une sélection de lames de rideaux et d’accessoires de portes : lames finales, perforées, planes ou bombées de type C, ainsi que les éléments de guidage.',
+    seoDescription: 'Lames pour rideaux métalliques et accessoires de portes : modèles finaux, perforés, plans ou bombés, avec éléments de guidage. Catalogue SOQUIBAT.',
     references: productPhotos.lamesRideaux,
   },
   {
@@ -154,6 +159,7 @@ export const products = [
     image: productPhotos.pannes[0]?.image ?? heroPartners,
     referenceCount: productPhotos.pannes.length,
     description: 'Des profilés pannes C et Z proposés en différentes dimensions et épaisseurs pour répondre aux besoins des projets de construction.',
+    seoDescription: 'Profilés pannes C et Z pour les projets de construction en Tunisie. Consultez les références SOQUIBAT et contactez-nous pour votre demande.',
     references: productPhotos.pannes,
   },
   {
@@ -162,6 +168,7 @@ export const products = [
     image: productPhotos.fersMarchands[0]?.image ?? heroPartners,
     referenceCount: productPhotos.fersMarchands.length,
     description: 'Une gamme de fers marchands laminés à chaud, appréciés pour leur soudabilité et leur aptitude à la mise en forme dans les domaines du bâtiment et de la forge.',
+    seoDescription: 'Fers marchands laminés à chaud pour le bâtiment et la forge. Découvrez le catalogue SOQUIBAT et demandez un devis pour votre projet en Tunisie.',
     references: productPhotos.fersMarchands,
   },
   {
@@ -170,6 +177,7 @@ export const products = [
     image: productPhotos.accessoires[0]?.image ?? heroPartners,
     referenceCount: productPhotos.accessoires.length,
     description: 'Des accessoires de charpente métallique pour compléter les structures et répondre aux besoins spécifiques des chantiers.',
+    seoDescription: 'Accessoires de charpente métallique pour compléter vos structures et chantiers. Consultez les références SOQUIBAT en Tunisie.',
     references: productPhotos.accessoires,
   },
   {
@@ -178,6 +186,7 @@ export const products = [
     image: productPhotos.inox[0]?.image ?? heroPartners,
     referenceCount: inoxReferences.length,
     description: 'Une gamme de produits inox comprenant des accessoires, profilés, tôles et tubes pour différents besoins de transformation et de construction.',
+    seoDescription: 'Produits en inox : accessoires, profilés, tôles et tubes pour la transformation et la construction. Découvrez les références SOQUIBAT.',
     references: inoxReferences,
   },
   {
@@ -186,6 +195,7 @@ export const products = [
     image: productPhotos.aluminium[0]?.image ?? heroPartners,
     referenceCount: productPhotos.aluminium.length,
     description: 'Des tôles aluminium, proposées en version lisse ou striée, pour répondre aux besoins d’aménagement et de construction.',
+    seoDescription: 'Tôles en aluminium lisses ou striées pour l’aménagement et la construction. Consultez le catalogue SOQUIBAT et demandez un devis.',
     references: productPhotos.aluminium,
   },
   {
@@ -194,6 +204,7 @@ export const products = [
     image: productPhotos.aciersSpeciaux[0]?.image ?? heroPartners,
     referenceCount: productPhotos.aciersSpeciaux.length,
     description: 'Une sélection d’aciers spéciaux comprenant des ronds pleins aux caractéristiques distinctes, selon les exigences de chaque projet.',
+    seoDescription: 'Aciers spéciaux et ronds pleins pour répondre aux exigences de vos projets. Découvrez les références proposées par SOQUIBAT en Tunisie.',
     references: productPhotos.aciersSpeciaux,
   },
   {
@@ -202,6 +213,7 @@ export const products = [
     image: productPhotos.decoupeLaser[0]?.image ?? heroPartners,
     referenceCount: productPhotos.decoupeLaser.length,
     description: 'Un service de découpe laser pour la réalisation de pièces métalliques adaptées aux besoins de votre projet.',
+    seoDescription: 'Service de découpe laser de pièces métalliques en Tunisie. Présentez votre besoin à SOQUIBAT pour étudier une solution adaptée au projet.',
     references: productPhotos.decoupeLaser,
   },
   {
@@ -210,6 +222,7 @@ export const products = [
     image: productPhotos.ossature[0]?.image ?? heroPartners,
     referenceCount: ossatureReferences.length,
     description: 'Une gamme d’éléments d’ossature métallique conçus pour les plafonds et cloisons en plaques de plâtre.',
+    seoDescription: 'Éléments d’ossature métallique pour plafonds et cloisons en plaques de plâtre. Découvrez les références SOQUIBAT pour vos projets.',
     references: ossatureReferences,
   },
   {
@@ -218,6 +231,7 @@ export const products = [
     image: productPhotos.portesFrigorifiques[0]?.image ?? heroPartners,
     referenceCount: productPhotos.portesFrigorifiques.length,
     description: 'Une gamme de portes frigorifiques adaptées aux chambres froides et aux espaces à température contrôlée.',
+    seoDescription: 'Portes frigorifiques pour chambres froides et espaces à température contrôlée. Consultez les références SOQUIBAT et demandez conseil.',
     references: productPhotos.portesFrigorifiques,
   },
 ];
