@@ -59,13 +59,13 @@ export function Groupe() {
                 <div className="mt-8 flex flex-wrap gap-4">
                   <Link
                     to="/produits"
-                    className="button-swipe inline-flex min-h-12 items-center justify-center rounded-md bg-orange px-5 py-3 font-semibold text-slate-950 transition-colors hover:bg-orange-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
+                    className="inline-flex min-h-12 items-center justify-center rounded-md bg-orange px-5 py-3 font-semibold text-slate-950 transition-colors hover:bg-orange-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
                   >
                     Découvrir nos produits
                   </Link>
                   <Link
                     to="/contact"
-                    className="button-swipe inline-flex min-h-12 items-center justify-center rounded-md border border-line px-5 py-3 font-semibold transition-colors hover:border-orange hover:text-orange focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
+                    className="inline-flex min-h-12 items-center justify-center rounded-md border border-line px-5 py-3 font-semibold transition-colors hover:border-orange hover:text-orange focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
                   >
                     Nous contacter
                   </Link>

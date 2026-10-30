@@ -46,7 +46,7 @@ export function Header() {
             <img
               src={whiteLogo}
               alt="Soquibat Group"
-              className="h-10 w-32 object-cover lg:h-12 lg:w-40"
+              className="h-14 w-44 object-cover lg:h-16 lg:w-52"
             />
           </Link>
 

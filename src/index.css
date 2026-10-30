@@ -24,8 +24,8 @@
   --color-ink: #000000;
   --color-ink-soft: #17181b;
   --color-paper: #f5f4f1;
-  --color-orange: #f47b20;
-  --color-orange-dark: #c6530a;
+  --color-orange: #DF7E48;
+  --color-orange-dark: #DF7E48;
   --color-steel: #8a9099;
   --color-line: rgba(255, 255, 255, 0.14);
 }
@@ -107,12 +107,15 @@ a {
   color: inherit;
 }
 
+.global-search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
 ::selection {
   background: var(--color-orange);
   color: #fff;
 }
 
-button,
 .button-swipe {
   position: relative;
   isolation: isolate;
@@ -125,7 +128,6 @@ button,
   color: #fff;
 }
 
-button::before,
 .button-swipe::before {
   position: absolute;
   z-index: -1;
@@ -139,17 +141,9 @@ button::before,
   transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-button:hover::before,
-button:focus-visible::before,
 .button-swipe:hover::before,
 .button-swipe:focus-visible::before {
   transform: scaleX(1);
-}
-
-button.button-no-swipe::before,
-button.button-no-swipe:hover::before,
-button.button-no-swipe:focus-visible::before {
-  content: none;
 }
 
 .dot-grid {

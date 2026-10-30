@@ -59,13 +59,25 @@ function ProductLink({
           aria-controls={detailsId}
           className="flex h-8 w-8 shrink-0 items-center justify-center cursor-pointer font-display text-xl text-orange transition-transform duration-300 hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
         >
-          <motion.span
-            animate={{ rotate: expanded ? 180 : 0 }}
-            transition={{ duration: 0.1 }}
+          <motion.svg
             aria-hidden="true"
+            viewBox="0 0 20 20"
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            animate={{ rotate: expanded ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
           >
-            {expanded ? '-' : '+'}
-          </motion.span>
+            <path d="M4 10h12" />
+            <motion.path
+              d="M10 4v12"
+              animate={{ scaleY: expanded ? 0 : 1 }}
+              transition={{ duration: 0.2 }}
+              style={{ transformOrigin: 'center' }}
+            />
+          </motion.svg>
         </button>
       </div>
       <AnimatePresence initial={false}>

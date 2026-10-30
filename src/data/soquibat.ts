@@ -20,6 +20,7 @@ export const company = {
 };
 
 export const nav = [
+  { label: 'Accueil', href: '/' },
   { label: 'Nos produits', href: '/produits' },
   { label: 'Groupe', href: '/groupe' },
   { label: 'Contact', href: '/contact' },

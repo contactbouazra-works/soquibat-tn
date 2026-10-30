@@ -34,7 +34,7 @@ function ContactIcon({ name }: { name: ContactIconName }) {
   };
 
   return (
-    <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0 text-amber-500">
+    <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0 text-orange">
       {paths[name]}
     </svg>
   );
@@ -68,7 +68,7 @@ function FooterLinkList({
         ))}
         {moreHref && (
           <li>
-            <Link to={moreHref} className="text-sm font-semibold text-amber-500 transition-colors hover:text-amber-400">
+            <Link to={moreHref} className="text-sm font-semibold text-orange transition-colors hover:text-orange-dark">
               Voir plus
             </Link>
           </li>
@@ -146,7 +146,7 @@ export function Footer() {
 
           <Link
             to="/contact"
-            className="button-swipe inline-flex min-h-12 items-center justify-center rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-amber-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-500"
+            className="button-swipe inline-flex min-h-12 items-center justify-center rounded-md bg-orange px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-orange-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
           >
             Contactez-nous
           </Link>
@@ -176,7 +176,7 @@ export function Footer() {
                   className="inline-flex items-center gap-1.5 text-xs text-slate-400 transition-colors hover:text-white"
                 >
                   {social.label}
-                  <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" className="h-3 w-3 text-amber-500">
+                  <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" className="h-3 w-3 text-orange">
                     <path d="M4 12 12 4M5 4h7v7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </a>

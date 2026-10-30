@@ -23,7 +23,7 @@ export function CTAButton({ href, children, variant = 'orange', className, exter
       initial="rest"
     >
       <span
-        className={`button-swipe flex h-9 w-9 shrink-0 items-center justify-center text-lg font-bold transition-colors ${
+        className={`flex h-9 w-9 shrink-0 items-center justify-center text-lg font-bold transition-colors ${
           isGhost ? 'border border-current text-current' : 'bg-orange text-white'
         }`}
       >

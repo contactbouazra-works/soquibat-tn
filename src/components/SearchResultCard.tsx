@@ -17,7 +17,7 @@ export function SearchResultCard({
     <Link
       to={result.href}
       onClick={onSelect}
-      className="group flex min-w-0 items-center gap-4 rounded-xl border border-slate-200 bg-white p-3 text-slate-900 transition-all duration-200 hover:border-indigo-500 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-amber-400 dark:focus-visible:outline-amber-400 sm:gap-5 sm:p-4"
+      className="group flex min-w-0 items-center gap-4 rounded-xl border border-slate-200 bg-white p-3 text-slate-900 transition-all duration-200 hover:border-orange hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-orange dark:focus-visible:outline-orange sm:gap-5 sm:p-4"
     >
       <span className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800 sm:h-20 sm:w-20">
         <img src={result.image} alt="" loading="lazy" className="h-full w-full object-cover" />

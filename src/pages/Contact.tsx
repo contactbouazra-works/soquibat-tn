@@ -118,7 +118,7 @@ export function Contact() {
 
               <button
                 type="submit"
-                className="button-swipe inline-flex min-h-12 items-center gap-4 rounded-md bg-orange px-6 py-3 font-semibold text-slate-950 transition-colors hover:bg-orange-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
+                className="inline-flex min-h-12 items-center gap-4 rounded-md bg-orange px-6 py-3 font-semibold text-slate-950 transition-colors hover:bg-orange-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
               >
                 Envoyer
                 <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" className="h-4 w-4">

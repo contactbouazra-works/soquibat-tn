@@ -48,7 +48,7 @@ export function Products() {
                     transition={{ duration: 0.3 }}
                   />
                   <div className="absolute inset-x-0 bottom-0 flex flex-col justify-end p-4 sm:p-6">
-                    <span className="mb-2 h-0.5 w-10 bg-amber-500" />
+                    <span className="mb-2 h-0.5 w-10 bg-orange" />
                     <h2 className="font-display text-lg uppercase text-slate-900 drop-shadow-[0_2px_4px_rgba(0,0,0,0.12)] dark:text-white dark:drop-shadow-none sm:text-xl">
                       {product.name}
                     </h2>

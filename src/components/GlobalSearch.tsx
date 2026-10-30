@@ -109,16 +109,27 @@ export function GlobalSearch() {
 
   return (
     <>
-      <button
-        ref={triggerRef}
-        type="button"
-        onClick={() => setIsOpen(true)}
-        aria-label="Ouvrir la recherche"
-        title="Rechercher (⌘K / Ctrl+K)"
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-paper transition-colors hover:border-orange hover:text-orange focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
-      >
-        <SearchIcon className="h-5 w-5" />
-      </button>
+      <div className="group relative">
+        <button
+          ref={triggerRef}
+          type="button"
+          onClick={() => setIsOpen(true)}
+          aria-label="Ouvrir la recherche"
+          aria-describedby="search-shortcut-tooltip"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-paper transition-colors hover:border-orange hover:text-orange focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
+        >
+          <SearchIcon className="h-5 w-5" />
+        </button>
+        <span
+          id="search-shortcut-tooltip"
+          role="tooltip"
+          className="pointer-events-none absolute right-0 top-full z-50 mt-2 w-max rounded-md border border-line bg-black px-3 py-2 text-xs text-paper opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
+        >
+          Ouvrir la recherche : <kbd className="ml-1 rounded border border-line px-1.5 py-0.5 font-mono">Ctrl K</kbd>
+          <span className="mx-1 text-paper/50">ou</span>
+          <kbd className="rounded border border-line px-1.5 py-0.5 font-mono">⌘ K</kbd>
+        </span>
+      </div>
 
       <AnimatePresence>
         {isOpen && (
@@ -152,7 +163,7 @@ export function GlobalSearch() {
                     onKeyDown={handleInputKeyDown}
                     placeholder="Rechercher des produits, des pages du groupe…"
                     autoComplete="off"
-                    className="h-10 min-w-0 flex-1 bg-transparent text-base text-slate-900 outline-none placeholder:text-slate-400 dark:text-white dark:placeholder:text-slate-500 sm:text-lg"
+                    className="global-search-input h-10 min-w-0 flex-1 bg-transparent text-base text-slate-900 outline-none placeholder:text-slate-400 dark:text-white dark:placeholder:text-slate-500 sm:text-lg"
                   />
                   {isSearching ? (
                     <Spinner />
@@ -165,7 +176,7 @@ export function GlobalSearch() {
                         inputRef.current?.focus();
                       }}
                       aria-label="Effacer la recherche"
-                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-slate-500 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-indigo-500 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-slate-500 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-orange dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
                     >
                       <CloseIcon className="h-4 w-4" />
                     </button>
@@ -212,7 +223,7 @@ export function GlobalSearch() {
                 <button
                   type="button"
                   onClick={goToAllResults}
-                  className="flex w-full items-center justify-between gap-4 border-t border-slate-200 bg-slate-50 px-5 py-4 text-left text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-indigo-500 dark:border-slate-800 dark:bg-black dark:text-slate-100 dark:hover:bg-slate-800 dark:focus-visible:outline-amber-400"
+                  className="flex w-full items-center justify-between gap-4 border-t border-slate-200 bg-slate-50 px-5 py-4 text-left text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-orange dark:border-slate-800 dark:bg-black dark:text-slate-100 dark:hover:bg-slate-800 dark:focus-visible:outline-orange"
                 >
                   <span>Voir tous les {results.length} résultats pour « {query.trim()} »</span>
                   <span aria-hidden="true">→</span>
@@ -248,7 +259,7 @@ function CloseIcon({ className }: { className: string }) {
 
 function Spinner() {
   return (
-    <svg aria-label="Recherche en cours" role="status" viewBox="0 0 24 24" className="h-5 w-5 shrink-0 animate-spin text-indigo-600 dark:text-amber-400">
+    <svg aria-label="Recherche en cours" role="status" viewBox="0 0 24 24" className="h-5 w-5 shrink-0 animate-spin text-orange">
       <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
       <path d="M21 12a9 9 0 0 0-9-9" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="3" />
     </svg>
