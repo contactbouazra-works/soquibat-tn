@@ -62,7 +62,7 @@ export function Header() {
             ))}
             <a
               href="tel:+21670131500"
-              className="button-swipe border border-line px-4 py-2 font-display text-sm tracking-[0.06em] uppercase transition-colors hover:border-orange hover:text-orange focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
+              className="button-swipe button-swipe-transparent border border-line px-4 py-2 font-display text-sm tracking-[0.06em] uppercase transition-colors hover:border-orange hover:text-orange focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
             >
               +216 70 131 500
             </a>
