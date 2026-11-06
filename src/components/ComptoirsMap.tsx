@@ -9,7 +9,7 @@ const markerIcon = L.divIcon({
   className: 'comptoir-marker-shell',
   html: `
     <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 58" width="48" height="58">
-      <path d="M24 1.5A22.5 22.5 0 0 0 1.5 24C1.5 39.1 24 56.5 24 56.5S46.5 39.1 46.5 24A22.5 22.5 0 0 0 24 1.5Z" fill="#F5F4F1" stroke="#17181B" stroke-width="2"/>
+      <path d="M24 1.5A22.5 22.5 0 0 0 1.5 24C1.5 39.1 24 56.5 24 56.5S46.5 39.1 46.5 24A22.5 22.5 0 0 0 24 1.5Z" fill="#17181B" stroke="#000000" stroke-width="2"/>
       <image href="${companyMapIcon}" x="11" y="11" width="26" height="26" preserveAspectRatio="xMidYMid meet"/>
     </svg>
   `,
