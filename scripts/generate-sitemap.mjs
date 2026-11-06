@@ -7,13 +7,16 @@ const server = await createServer({
 });
 
 try {
-  const { products } = await server.ssrLoadModule('/src/data/soquibat.ts');
+  const { actualites, products } = await server.ssrLoadModule('/src/data/soquibat.ts');
   const paths = [
     '/',
     '/produits',
+    '/actualites',
+    '/comptoirs',
     '/groupe',
     '/contact',
     ...products.map((product) => `/produits/${encodeURIComponent(product.slug)}`),
+    ...actualites.map((item) => `/actualites/${encodeURIComponent(item.slug)}`),
   ];
   const urls = paths
     .map((path) => `  <url><loc>https://soquibat.tn${path}</loc></url>`)

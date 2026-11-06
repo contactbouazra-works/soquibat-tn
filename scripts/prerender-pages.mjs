@@ -11,7 +11,7 @@ const server = await createServer({
 });
 
 try {
-  const [{ default: App }, { products }] = await Promise.all([
+  const [{ default: App }, { actualites, products }] = await Promise.all([
     server.ssrLoadModule('/src/App.tsx'),
     server.ssrLoadModule('/src/data/soquibat.ts'),
   ]);
@@ -28,10 +28,13 @@ try {
   const routes = [
     '/',
     '/produits',
+    '/actualites',
+    '/comptoirs',
     '/groupe',
     '/contact',
     '/search',
     ...products.map((product) => `/produits/${product.slug}`),
+    ...actualites.map((item) => `/actualites/${item.slug}`),
   ];
 
   for (const route of routes) {

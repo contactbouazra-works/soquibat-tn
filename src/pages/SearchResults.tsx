@@ -4,7 +4,7 @@ import { SearchResultCard } from '../components/SearchResultCard';
 import { Seo } from '../components/Seo';
 import { searchSiteContent, type SearchCategory } from '../lib/siteSearch';
 
-const categories = ['Tous', 'Produits', 'Groupe'] as const;
+const categories = ['Tous', 'Produits', 'Groupe', 'Actualités'] as const;
 type CategoryFilter = (typeof categories)[number];
 
 export function SearchResults() {

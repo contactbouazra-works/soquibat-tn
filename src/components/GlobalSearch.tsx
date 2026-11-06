@@ -134,7 +134,7 @@ export function GlobalSearch() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 z-[60] overflow-y-auto bg-black/50 px-4 pb-8 pt-[8vh] backdrop-blur-md sm:px-6"
+            className="fixed inset-0 z-[60] overflow-y-auto bg-black/75 px-4 pb-8 pt-[8vh] backdrop-blur-md sm:px-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -145,16 +145,16 @@ export function GlobalSearch() {
               role="dialog"
               aria-modal="true"
               aria-labelledby="global-search-title"
-              className="mx-auto w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-2xl dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100"
+              className="mx-auto w-full max-w-2xl overflow-hidden rounded-2xl border border-orange/40 bg-[#090909] text-slate-100 shadow-2xl shadow-black/60"
               initial={{ opacity: 0, scale: 0.95, y: 12 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.97, y: 8 }}
               transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
             >
               <h2 id="global-search-title" className="sr-only">Recherche globale</h2>
-              <div className="sticky top-0 z-10 border-b border-slate-200 bg-white/95 p-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95 sm:p-5">
+              <div className="sticky top-0 z-10 border-b border-orange/25 bg-black/95 p-4 backdrop-blur sm:p-5">
                 <label className="flex items-center gap-3">
-                  <SearchIcon className="h-5 w-5 shrink-0 text-slate-500 dark:text-slate-400" />
+                  <SearchIcon className="h-5 w-5 shrink-0 text-orange" />
                   <input
                     ref={inputRef}
                     type="search"
@@ -163,7 +163,7 @@ export function GlobalSearch() {
                     onKeyDown={handleInputKeyDown}
                     placeholder="Rechercher des produits, des pages du groupe…"
                     autoComplete="off"
-                    className="global-search-input h-10 min-w-0 flex-1 bg-transparent text-base text-slate-900 outline-none placeholder:text-slate-400 dark:text-white dark:placeholder:text-slate-500 sm:text-lg"
+                    className="global-search-input h-10 min-w-0 flex-1 bg-transparent text-base text-white outline-none placeholder:text-slate-500 sm:text-lg"
                   />
                   {isSearching ? (
                     <Spinner />
@@ -176,7 +176,7 @@ export function GlobalSearch() {
                         inputRef.current?.focus();
                       }}
                       aria-label="Effacer la recherche"
-                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-slate-500 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-orange dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-slate-400 transition-colors hover:bg-orange/10 hover:text-orange focus-visible:outline-2 focus-visible:outline-orange"
                     >
                       <CloseIcon className="h-4 w-4" />
                     </button>
@@ -184,28 +184,28 @@ export function GlobalSearch() {
                   <button
                     type="button"
                     onClick={close}
-                    className="shrink-0 rounded-md border border-slate-200 px-2 py-1 font-mono text-[0.65rem] text-slate-500 hover:border-slate-400 dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-500"
+                    className="shrink-0 rounded-md border border-orange/30 px-2 py-1 font-mono text-[0.65rem] text-slate-400 transition-colors hover:border-orange hover:text-orange"
                   >
                     ESC
                   </button>
                 </label>
-                <p className="mt-2 pl-8 text-[0.68rem] text-slate-500 dark:text-slate-400">
+                <p className="mt-2 pl-8 text-[0.68rem] text-slate-400">
                   Recherchez dans les produits et les pages du groupe.
                 </p>
               </div>
 
-              <div className="max-h-[60vh] space-y-3 overflow-y-auto p-4 sm:p-5">
+              <div className="max-h-[60vh] space-y-3 overflow-y-auto bg-[#090909] p-4 sm:p-5">
                 {!query.trim() ? (
-                  <p className="py-8 text-center text-sm text-slate-500 dark:text-slate-400">
+                  <p className="py-8 text-center text-sm text-slate-400">
                     Saisissez un mot-clé pour lancer la recherche.
                   </p>
                 ) : isSearching ? (
-                  <p className="py-8 text-center text-sm text-slate-500 dark:text-slate-400" role="status">
+                  <p className="py-8 text-center text-sm text-slate-400" role="status">
                     Recherche en cours…
                   </p>
                 ) : results.length ? (
                   <>
-                    <p className="px-1 pb-1 text-xs text-slate-500 dark:text-slate-400">
+                    <p className="px-1 pb-1 text-xs text-orange">
                       {results.length} résultat{results.length > 1 ? 's' : ''}
                     </p>
                     {results.slice(0, RESULT_LIMIT).map((result) => (
@@ -213,7 +213,7 @@ export function GlobalSearch() {
                     ))}
                   </>
                 ) : (
-                  <p className="py-8 text-center text-sm text-slate-500 dark:text-slate-400">
+                  <p className="py-8 text-center text-sm text-slate-400">
                     Aucun résultat pour « {debouncedQuery} ».
                   </p>
                 )}
@@ -223,7 +223,7 @@ export function GlobalSearch() {
                 <button
                   type="button"
                   onClick={goToAllResults}
-                  className="flex w-full items-center justify-between gap-4 border-t border-slate-200 bg-slate-50 px-5 py-4 text-left text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-orange dark:border-slate-800 dark:bg-black dark:text-slate-100 dark:hover:bg-slate-800 dark:focus-visible:outline-orange"
+                  className="flex w-full items-center justify-between gap-4 border-t border-orange/25 bg-black px-5 py-4 text-left text-sm font-semibold text-slate-100 transition-colors hover:bg-orange/10 hover:text-orange focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-orange"
                 >
                   <span>Voir tous les {results.length} résultats pour « {query.trim()} »</span>
                   <span aria-hidden="true">→</span>

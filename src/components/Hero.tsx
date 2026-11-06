@@ -85,7 +85,7 @@ export function Hero() {
           </div>
         </div>
       </div>
-      <div className="group absolute bottom-6 right-6 z-30 flex items-center gap-3 lg:bottom-8 lg:right-12">
+      <div className="group absolute bottom-24 right-6 z-30 flex items-center gap-3 lg:bottom-28 lg:right-12">
         <div className="pointer-events-none flex items-center gap-2 rounded-full border border-white/20 bg-black/60 px-3 py-2 opacity-0 backdrop-blur transition-opacity group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
           <input
             type="range"

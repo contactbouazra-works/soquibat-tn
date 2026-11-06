@@ -7,7 +7,7 @@ import { InternationalSection } from '../components/InternationalSection';
 import { Seo } from '../components/Seo';
 import { absoluteSeoUrl } from '../lib/seo';
 import logo from '../assets/img/logo.png';
-import { company, contact, socials } from '../data/soquibat';
+import { company, contact } from '../data/soquibat';
 
 export function Home() {
   const organizationSchema = {
@@ -31,7 +31,6 @@ export function Home() {
       addressLocality: 'Tunis',
       addressCountry: 'TN',
     },
-    sameAs: socials.map(({ href }) => href),
   };
   const websiteSchema = {
     '@context': 'https://schema.org',

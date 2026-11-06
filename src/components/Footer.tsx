@@ -2,16 +2,17 @@ import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import whiteLogo from '../assets/img/logo-white.png';
-import { contact, products, socials } from '../data/soquibat';
+import { contact, products } from '../data/soquibat';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 
 const companyLinks = [
   { label: 'Notre histoire', href: '/groupe' },
   { label: 'Filiales', href: '/#filiales' },
+  { label: 'Actualités', href: '/actualites' },
 ];
 
 const supportLinks = [
-  { label: 'Points de vente', href: '/#points-de-vente' },
+  { label: 'Points de vente', href: '/comptoirs' },
   { label: 'Catalogue & fiches techniques', href: '/produits' },
   {
     label: 'Demander les mentions légales',
@@ -56,11 +57,11 @@ function FooterLinkList({
         {links.map((link) => (
           <li key={link.label}>
             {link.href.startsWith('mailto:') ? (
-              <a href={link.href} className="text-sm leading-relaxed text-slate-400 transition-colors hover:text-white">
+              <a href={link.href} className="footer-link text-sm leading-relaxed text-slate-400">
                 {link.label}
               </a>
             ) : (
-              <Link to={link.href} className="text-sm leading-relaxed text-slate-400 transition-colors hover:text-white">
+              <Link to={link.href} className="footer-link text-sm leading-relaxed text-slate-400">
                 {link.label}
               </Link>
             )}
@@ -68,7 +69,7 @@ function FooterLinkList({
         ))}
         {moreHref && (
           <li>
-            <Link to={moreHref} className="text-sm font-semibold text-orange transition-colors hover:text-orange-dark">
+            <Link to={moreHref} className="footer-link text-sm font-semibold text-slate-400">
               Voir plus
             </Link>
           </li>
@@ -89,11 +90,11 @@ export function Footer() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.1 }}
       transition={{ duration: reduceMotion ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="relative z-30 m-0 flex h-auto min-h-screen w-full flex-col overflow-visible border-t border-slate-800 bg-black p-0 text-slate-100"
+      className="relative z-30 m-0 flex w-full flex-col overflow-visible border-t border-orange/50 bg-black p-0 text-slate-100"
     >
-      <section className="border-b border-slate-800 bg-black px-6 pb-8 pt-24 lg:px-12 lg:pb-10 lg:pt-28">
+      <section className="border-b border-orange/20 bg-[#0a0908] px-6 pb-8 pt-20 lg:px-12 lg:py-10">
         <div className="mx-auto grid max-w-[1400px] gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
             <div className="flex items-start gap-3">
               <ContactIcon name="phone" />
               <div>
@@ -101,7 +102,7 @@ export function Footer() {
                 <ul className="mt-2 space-y-1">
                   {phoneNumbers.map((phone) => (
                     <li key={phone}>
-                      <a href={`tel:${phone.replace(/\s+/g, '')}`} className="text-sm text-slate-400 transition-colors hover:text-white">
+                      <a href={`tel:${phone.replace(/\s+/g, '')}`} className="footer-link text-sm text-slate-400">
                         {phone}
                       </a>
                     </li>
@@ -122,7 +123,7 @@ export function Footer() {
               <ContactIcon name="mail" />
               <div>
                 <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-slate-100">Email</h2>
-                <a href={`mailto:${contact.email}`} className="mt-2 inline-block break-all text-sm text-slate-400 transition-colors hover:text-white">
+                <a href={`mailto:${contact.email}`} className="footer-link mt-2 inline-block break-all text-sm text-slate-400">
                   {contact.email}
                 </a>
               </div>
@@ -153,8 +154,8 @@ export function Footer() {
         </div>
       </section>
 
-      <section className="bg-black px-6 py-10 lg:px-12 lg:py-14">
-        <div className="mx-auto grid max-w-[1400px] gap-10 sm:grid-cols-2 lg:grid-cols-[1.1fr_0.8fr_1.5fr_1fr_0.8fr] lg:gap-8">
+      <section className="bg-black px-6 py-10 lg:px-12 lg:py-12">
+        <div className="mx-auto grid max-w-[1400px] gap-9 sm:grid-cols-2 lg:grid-cols-[1.2fr_0.7fr_1.15fr_1.25fr_0.8fr] lg:gap-10">
           <div>
             <Link to="/" aria-label="Soquibat Group — accueil" className="inline-flex">
               <img
@@ -166,22 +167,6 @@ export function Footer() {
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
               Leader dans le domaine de la sidérurgie en Tunisie depuis plus de 40 ans.
             </p>
-            <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
-              {socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-slate-400 transition-colors hover:text-white"
-                >
-                  {social.label}
-                  <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" className="h-3 w-3 text-orange">
-                    <path d="M4 12 12 4M5 4h7v7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </a>
-              ))}
-            </div>
           </div>
 
           <FooterLinkList title="Groupe" links={companyLinks} />
@@ -196,15 +181,31 @@ export function Footer() {
           <FooterLinkList title="Support & légal" links={supportLinks} />
           <div>
             <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-slate-100">Contact</h2>
-            <Link to="/contact" className="mt-4 inline-block text-sm text-slate-400 transition-colors hover:text-white">
+            <Link to="/contact" className="footer-link mt-4 inline-block text-sm text-slate-400">
               Écrivez à notre équipe
             </Link>
           </div>
         </div>
       </section>
 
-      <div className="mt-auto border-t border-slate-800 px-6 py-5 lg:px-12">
-        <div className="mx-auto flex max-w-[1400px] flex-col gap-2 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+      <section className="border-t border-orange/20 bg-[#0a0908] px-6 py-5 text-slate-100 lg:px-12">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+            Certifications
+          </h2>
+          <div className="flex gap-3" aria-label="Certifications ISO et CE">
+            <span className="inline-flex min-h-9 items-center rounded border border-orange/35 px-3 font-display text-xs font-semibold tracking-[0.1em] text-orange">
+              ISO
+            </span>
+            <span className="inline-flex min-h-9 items-center rounded border border-orange/35 px-3 font-display text-xs font-semibold tracking-[0.1em] text-orange">
+              CE
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <div className="border-t border-white/10 bg-black px-6 py-4 text-paper/45 lg:px-12">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-2 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>Copyright © SOQUIBAT Group. All rights reserved.</p>
         </div>
       </div>

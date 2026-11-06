@@ -1,7 +1,7 @@
 import heroImage from '../assets/img/hero-1.jpg';
-import { company, international, products, subsidiaries } from '../data/soquibat';
+import { actualites, comptoirs, company, international, products, subsidiaries } from '../data/soquibat';
 
-export type SearchCategory = 'Produits' | 'Groupe';
+export type SearchCategory = 'Produits' | 'Groupe' | 'Actualités';
 
 export type SearchResult = {
   id: string;
@@ -30,6 +30,26 @@ const searchIndex: SearchResult[] = [
       searchText: `${product.name} ${product.slug} ${product.description} ${references}`,
     };
   }),
+  ...actualites.map((item) => ({
+    id: `actualite-${item.date}-${item.title}`,
+    category: 'Actualités' as const,
+    title: item.title,
+    metadata: `${item.category} · ${item.dateLabel}`,
+    description: item.description,
+    image: item.image,
+    href: '/actualites',
+    searchText: `${item.title} ${item.category} ${item.dateLabel} ${item.description}`,
+  })),
+  {
+    id: 'soquibat-comptoirs',
+    category: 'Groupe' as const,
+    title: 'Nos comptoirs',
+    metadata: `${comptoirs.length} points de vente en Tunisie`,
+    description: 'Retrouvez les adresses et coordonnées des comptoirs SOQUIBAT Group en Tunisie.',
+    image: heroImage,
+    href: '/comptoirs',
+    searchText: `comptoirs points de vente ${comptoirs.map(({ name, address }) => `${name} ${address}`).join(' ')}`,
+  },
   {
     id: 'group-soquibat',
     category: 'Groupe' as const,

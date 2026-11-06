@@ -107,8 +107,23 @@ a {
   color: inherit;
 }
 
+#site-footer .footer-link {
+  transition: color 180ms ease;
+}
+
+#site-footer .footer-link:hover,
+#site-footer .footer-link:focus-visible {
+  color: var(--color-orange);
+}
+
 .global-search-input::-webkit-search-cancel-button {
   display: none;
+}
+
+.comptoir-marker-shell {
+  background: transparent;
+  border: 0;
+  filter: drop-shadow(0 2px 4px rgb(0 0 0 / 40%));
 }
 
 ::selection {

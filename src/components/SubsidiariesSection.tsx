@@ -4,11 +4,8 @@ import { SectionTransition } from './motion/SectionTransition';
 
 export function SubsidiariesSection() {
   const renderCard = (sub: (typeof subsidiaries)[number], index: number) => (
-    <motion.a
+    <motion.div
       key={sub.name}
-      href={sub.href}
-      target={sub.href.startsWith('http') ? '_blank' : undefined}
-      rel={sub.href.startsWith('http') ? 'noreferrer' : undefined}
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.03 }}
@@ -26,7 +23,7 @@ export function SubsidiariesSection() {
       <span className="font-display text-[8px] uppercase tracking-[0.06em] text-white sm:text-xs sm:tracking-[0.12em] lg:text-sm">
         {sub.name}
       </span>
-    </motion.a>
+    </motion.div>
   );
 
   return (
