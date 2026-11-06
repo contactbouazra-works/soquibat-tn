@@ -22,9 +22,9 @@ export const company = {
 export const nav = [
   { label: 'Accueil', href: '/' },
   { label: 'Nos produits', href: '/produits' },
-  { label: 'Comptoirs', href: '/comptoirs' },
-  { label: 'Actualités', href: '/actualites' },
   { label: 'Groupe', href: '/groupe' },
+  { label: 'Actualités', href: '/actualites' },
+  { label: 'Comptoirs', href: '/comptoirs' },
   { label: 'Contact', href: '/contact' },
 ];
 

@@ -169,7 +169,6 @@ export function Footer() {
             </p>
           </div>
 
-          <FooterLinkList title="Groupe" links={companyLinks} />
           <FooterLinkList
             title="Produits"
             links={products.slice(0, 6).map((product) => ({
@@ -178,6 +177,7 @@ export function Footer() {
             }))}
             moreHref="/produits"
           />
+          <FooterLinkList title="Groupe" links={companyLinks} />
           <FooterLinkList title="Support & légal" links={supportLinks} />
           <div>
             <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-slate-100">Contact</h2>
