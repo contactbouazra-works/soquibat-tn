@@ -80,7 +80,7 @@ export default function ComptoirsMap({
           </Marker>
         ))}
       </MapContainer>
-      <p className="pointer-events-none absolute left-4 top-4 z-[400] rounded-lg border border-black/10 bg-white/95 px-3 py-2 text-xs font-medium text-slate-800 shadow-md">
+      <p className="pointer-events-none absolute right-4 top-4 z-[400] rounded-lg border border-black/10 bg-white/95 px-3 py-2 text-xs font-medium text-slate-800 shadow-md">
         {comptoirs.length} emplacements SOQUIBAT
       </p>
     </div>

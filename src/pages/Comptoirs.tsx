@@ -1,12 +1,23 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useRef, useState } from 'react';
 import { Seo } from '../components/Seo';
 import { comptoirs } from '../data/soquibat';
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 import { absoluteSeoUrl } from '../lib/seo';
 
 const ComptoirsMap = lazy(() => import('../components/ComptoirsMap'));
 
 export function Comptoirs() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const mapSectionRef = useRef<HTMLElement>(null);
+  const reduceMotion = usePrefersReducedMotion();
+
+  const showLocationOnMap = (locationId: string) => {
+    setSelectedId(locationId);
+    mapSectionRef.current?.scrollIntoView({
+      behavior: reduceMotion ? 'instant' : 'smooth',
+      block: 'start',
+    });
+  };
 
   return (
     <>
@@ -51,7 +62,11 @@ export function Comptoirs() {
             </p>
           </div>
 
-          <section aria-label="Carte des comptoirs" className="overflow-hidden rounded-2xl border border-orange/30 bg-ink-soft">
+          <section
+            ref={mapSectionRef}
+            aria-label="Carte des comptoirs"
+            className="scroll-mt-24 overflow-hidden rounded-2xl border border-orange/30 bg-ink-soft"
+          >
             <Suspense
               fallback={
                 <div className="flex h-[420px] items-center justify-center bg-[#e8e4dc] text-sm text-slate-700 sm:h-[540px]">
@@ -111,7 +126,7 @@ export function Comptoirs() {
                       </dl>
                       <button
                         type="button"
-                        onClick={() => setSelectedId(isSelected ? null : location.id)}
+                        onClick={() => showLocationOnMap(location.id)}
                         aria-pressed={isSelected}
                         className="ml-11 mt-5 font-display text-xs uppercase tracking-wide text-orange underline decoration-orange/40 underline-offset-4 transition-colors hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
                       >
